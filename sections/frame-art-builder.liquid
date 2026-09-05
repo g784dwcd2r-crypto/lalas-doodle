@@ -1,0 +1,768 @@
+{%- comment -%}
+  Build your piece — pick the artwork, then pick a frame.
+
+  Two real products are combined here and added to the basket as two lines:
+    * the artwork  (digital, no shipping)
+    * the frame    (physical, shipped, and sold EMPTY)
+
+  Keeping them separate is what lets the frame have its own size, stock and
+  postage while the artwork keeps its per-pet pricing.
+{%- endcomment -%}
+
+{%- liquid
+  assign art = section.settings.art_product
+  assign frame = section.settings.frame_product
+  assign art_variant = art.selected_or_first_available_variant
+-%}
+
+{%- if art == blank -%}
+  {%- if request.design_mode -%}
+    <div class="page-width" style="padding: 3rem 0; text-align: center;">
+      <p class="form-status form-status--error">
+        Pick your artwork product in this section's settings to switch the builder on.
+      </p>
+    </div>
+  {%- endif -%}
+{%- else -%}
+
+<div class="section fb scheme-{{ section.settings.color_scheme }}"
+  id="builder-{{ section.id }}"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+  <span id="build-yours" class="fb__anchor"></span>
+
+  <div class="page-width">
+    <div class="section-header text-center reveal">
+      {%- if section.settings.subheading != blank -%}
+        <span class="subheading">{{ section.settings.subheading }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="rte section-header__text">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="fb__layout reveal"
+      data-frame-builder
+      data-money-format="{{ shop.money_format | escape }}"
+      data-cart-url="{{ routes.cart_url }}">
+
+      {%- comment -%} ---------------- Live preview ---------------- {%- endcomment -%}
+      <div class="fb__preview-col">
+        <div class="fb__preview-sticky">
+          <div class="fb__stage">
+            <div class="fb__frame" data-fb-frame
+              style="--mat-color: {{ section.settings.mat_color }};">
+              <div class="fb__mat" data-fb-mat>
+                {%- liquid
+                  assign preview_image = section.settings.preview_image
+                  if preview_image == blank
+                    assign preview_image = art.featured_image
+                  endif
+                -%}
+                {%- if preview_image != blank -%}
+                  <img class="fb__art"
+                    src="{{ preview_image | image_url: width: 900 }}"
+                    srcset="{{ preview_image | image_url: width: 450 }} 450w, {{ preview_image | image_url: width: 900 }} 900w"
+                    sizes="(min-width: 990px) 44vw, 88vw"
+                    alt="{{ preview_image.alt | default: 'Your portrait, shown in a frame' | escape }}"
+                    loading="lazy">
+                {%- else -%}
+                  <div class="fb__art fb__art--empty">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+
+          <p class="fb__caption">
+            <span data-fb-caption>{{ section.settings.caption_no_frame }}</span>
+          </p>
+
+          {%- if section.settings.preview_note != blank -%}
+            <p class="fb__preview-note">{{ section.settings.preview_note }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} ---------------- The steps ---------------- {%- endcomment -%}
+      <div class="fb__steps">
+
+        {%- comment -%} Step 1 — the artwork {%- endcomment -%}
+        <section class="fb__step" aria-labelledby="fb-step1-{{ section.id }}">
+          <h3 class="fb__step-title" id="fb-step1-{{ section.id }}">
+            <span class="fb__step-num">1</span>
+            {{ section.settings.step_art_title }}
+          </h3>
+          {%- if section.settings.step_art_text != blank -%}
+            <p class="fb__step-text">{{ section.settings.step_art_text }}</p>
+          {%- endif -%}
+
+          <div data-fb-art-options>
+            <script type="application/json" data-fb-art-json>
+              [
+                {%- for variant in art.variants -%}
+                  {"id": {{ variant.id }}, "options": {{ variant.options | json }}, "price": {{ variant.price }}, "available": {{ variant.available | json }}}{% unless forloop.last %},{% endunless %}
+                {%- endfor -%}
+              ]
+            </script>
+
+            {%- unless art.has_only_default_variant -%}
+              {%- for option in art.options_with_values -%}
+                <div class="fb__option" data-fb-art-index="{{ forloop.index0 }}">
+                  <div class="fb__option-label">
+                    <span>{{ option.name }}</span>
+                    <span class="fb__option-value" data-fb-art-value>{{ option.selected_value }}</span>
+                  </div>
+                  <div class="variant-options">
+                    {%- for value in option.values -%}
+                      {%- assign uid = section.id | append: '-a' | append: forloop.parentloop.index0 | append: '-' | append: forloop.index0 -%}
+                      <input type="radio" id="FB-{{ uid }}"
+                        name="fb-art-{{ forloop.parentloop.index0 }}-{{ section.id }}"
+                        value="{{ value | escape }}"
+                        {% if option.selected_value == value %}checked{% endif %}>
+                      <label for="FB-{{ uid }}">{{ value }}</label>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+            {%- endunless -%}
+          </div>
+
+          <p class="fb__line">
+            <span>{{ art.title }}</span>
+            <strong data-fb-art-price>{{ art_variant.price | money }}</strong>
+          </p>
+        </section>
+
+        {%- comment -%} Step 2 — the frame {%- endcomment -%}
+        {%- if frame != blank -%}
+          <section class="fb__step" aria-labelledby="fb-step2-{{ section.id }}">
+            <h3 class="fb__step-title" id="fb-step2-{{ section.id }}">
+              <span class="fb__step-num">2</span>
+              {{ section.settings.step_frame_title }}
+            </h3>
+
+            {%- if section.settings.frame_note != blank -%}
+              <p class="fb__notice">
+                {% render 'icon-check' %}
+                <span>{{ section.settings.frame_note }}</span>
+              </p>
+            {%- endif -%}
+
+            <div data-fb-frame-options>
+              <script type="application/json" data-fb-frame-json>
+                [
+                  {%- for variant in frame.variants -%}
+                    {"id": {{ variant.id }}, "options": {{ variant.options | json }}, "price": {{ variant.price }}, "available": {{ variant.available | json }}}{% unless forloop.last %},{% endunless %}
+                  {%- endfor -%}
+                ]
+              </script>
+
+              <div class="fb__option">
+                <div class="fb__option-label"><span>{{ section.settings.frame_toggle_label }}</span></div>
+                <div class="variant-options">
+                  <input type="radio" id="FB-nf-{{ section.id }}" name="fb-wants-frame-{{ section.id }}" value="no" data-fb-wants-frame checked>
+                  <label for="FB-nf-{{ section.id }}">{{ section.settings.no_frame_label }}</label>
+                  <input type="radio" id="FB-yf-{{ section.id }}" name="fb-wants-frame-{{ section.id }}" value="yes" data-fb-wants-frame>
+                  <label for="FB-yf-{{ section.id }}">{{ section.settings.yes_frame_label }}</label>
+                </div>
+              </div>
+
+              <div class="fb__frame-fields" data-fb-frame-fields hidden>
+                {%- unless frame.has_only_default_variant -%}
+                  {%- for option in frame.options_with_values -%}
+                    <div class="fb__option" data-fb-frame-index="{{ forloop.index0 }}">
+                      <div class="fb__option-label">
+                        <span>{{ option.name }}</span>
+                        <span class="fb__option-value" data-fb-frame-value>{{ option.selected_value }}</span>
+                      </div>
+                      <div class="variant-options">
+                        {%- for value in option.values -%}
+                          {%- assign uid = section.id | append: '-f' | append: forloop.parentloop.index0 | append: '-' | append: forloop.index0 -%}
+                          <input type="radio" id="FB-{{ uid }}"
+                            name="fb-frame-{{ forloop.parentloop.index0 }}-{{ section.id }}"
+                            value="{{ value | escape }}"
+                            {% if option.selected_value == value %}checked{% endif %}>
+                          <label for="FB-{{ uid }}">{{ value }}</label>
+                        {%- endfor -%}
+                      </div>
+                    </div>
+                  {%- endfor -%}
+                {%- endunless -%}
+
+                <p class="fb__line">
+                  <span>{{ frame.title }}</span>
+                  <strong data-fb-frame-price>&mdash;</strong>
+                </p>
+              </div>
+            </div>
+          </section>
+        {%- endif -%}
+
+        {%- comment -%} Step 3 — about the pet {%- endcomment -%}
+        {%- if section.settings.show_fields -%}
+          <section class="fb__step" aria-labelledby="fb-step3-{{ section.id }}">
+            <h3 class="fb__step-title" id="fb-step3-{{ section.id }}">
+              <span class="fb__step-num">{% if frame != blank %}3{% else %}2{% endif %}</span>
+              {{ section.settings.step_details_title }}
+            </h3>
+            {%- if section.settings.step_details_text != blank -%}
+              <p class="fb__step-text">{{ section.settings.step_details_text }}</p>
+            {%- endif -%}
+
+            <div class="field">
+              <label class="field__label" for="FBPet-{{ section.id }}">
+                {{ section.settings.pet_name_label }}<span class="required" aria-hidden="true">*</span>
+              </label>
+              <input type="text" id="FBPet-{{ section.id }}" maxlength="120"
+                data-fb-prop="{{ section.settings.pet_name_label | escape }}" data-fb-required
+                placeholder="{{ section.settings.pet_name_placeholder }}">
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="FBInsta-{{ section.id }}">{{ section.settings.instagram_label }}</label>
+              <input type="text" id="FBInsta-{{ section.id }}" maxlength="80" autocapitalize="off" spellcheck="false"
+                data-fb-prop="{{ section.settings.instagram_label | escape }}"
+                placeholder="{{ section.settings.instagram_placeholder }}">
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="FBAbout-{{ section.id }}">{{ section.settings.about_label }}</label>
+              <textarea id="FBAbout-{{ section.id }}" maxlength="600"
+                data-fb-prop="{{ section.settings.about_label | escape }}"
+                placeholder="{{ section.settings.about_placeholder }}"></textarea>
+            </div>
+          </section>
+        {%- endif -%}
+
+        {%- comment -%} Total + add {%- endcomment -%}
+        <div class="fb__summary">
+          <div class="fb__summary-rows">
+            <div class="fb__summary-row">
+              <span data-fb-sum-art-label>{{ art.title }}</span>
+              <span data-fb-sum-art>{{ art_variant.price | money }}</span>
+            </div>
+            <div class="fb__summary-row" data-fb-sum-frame-row hidden>
+              <span data-fb-sum-frame-label>{{ frame.title }}</span>
+              <span data-fb-sum-frame>&mdash;</span>
+            </div>
+            <div class="fb__summary-row fb__summary-row--total">
+              <span>{{ section.settings.total_label }}</span>
+              <span data-fb-total>{{ art_variant.price | money }}</span>
+            </div>
+          </div>
+
+          <p class="fb__error" data-fb-error hidden></p>
+
+          <button type="button" class="button button--large button--full" data-fb-submit>
+            <span data-fb-submit-text>{{ section.settings.button_label }}</span>
+          </button>
+
+          {%- if section.settings.reassurance != blank -%}
+            <p class="fb__reassure">{{ section.settings.reassurance }}</p>
+          {%- endif -%}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- comment -%} --------------------------------------------------------------
+  Swatch colours, written from the section's blocks so the preview frame
+  can change colour with the chosen option value.
+-------------------------------------------------------------------------- {%- endcomment -%}
+<script type="application/json" data-fb-swatches-{{ section.id }}>
+  {
+    {%- for block in section.blocks -%}
+      {{ block.settings.label | json }}: {"color": {{ block.settings.color | json }}, "width": {{ block.settings.width | json }}}{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  }
+</script>
+
+<style>
+  #builder-{{ section.id }} .fb__anchor { display: block; position: relative; top: -90px; }
+
+  #builder-{{ section.id }} .fb__layout {
+    display: grid;
+    gap: 2.2rem;
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  @media screen and (min-width: 990px) {
+    #builder-{{ section.id }} .fb__layout {
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+    }
+    #builder-{{ section.id }} .fb__preview-sticky { position: sticky; top: 1.5rem; }
+  }
+
+  /* ---- the framed preview ---- */
+  #builder-{{ section.id }} .fb__stage {
+    display: grid;
+    place-items: center;
+    padding: clamp(0.8rem, 4vw, 2.2rem);
+    background: {{ section.settings.stage_color }};
+    border: var(--border-w) solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  #builder-{{ section.id }} .fb__frame {
+    width: 100%;
+    max-width: 420px;
+    padding: var(--frame-width, 0px);
+    background: var(--frame-color, transparent);
+    border-radius: 3px;
+    transition: padding 0.3s ease, background-color 0.3s ease;
+  }
+  #builder-{{ section.id }} .fb__frame[data-has-frame="true"] {
+    box-shadow: 0 10px 24px rgba(var(--green-deep-rgb), 0.22);
+  }
+
+  #builder-{{ section.id }} .fb__mat {
+    padding: 0;
+    background: transparent;
+    transition: padding 0.3s ease, background-color 0.3s ease;
+  }
+  #builder-{{ section.id }} .fb__frame[data-has-frame="true"] .fb__mat {
+    padding: clamp(10px, 4%, 26px);
+    background: var(--mat-color, #fff);
+  }
+
+  #builder-{{ section.id }} .fb__art {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+  #builder-{{ section.id }} .fb__frame:not([data-has-frame="true"]) .fb__art {
+    border-radius: var(--radius-sm);
+    outline: 2px dashed rgba(var(--green-deep-rgb), 0.3);
+    outline-offset: 5px;
+  }
+
+  #builder-{{ section.id }} .fb__caption {
+    text-align: center;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    margin: 1.1rem 0 0;
+  }
+  #builder-{{ section.id }} .fb__preview-note {
+    text-align: center;
+    font-size: 0.88rem;
+    opacity: 0.75;
+    margin: 0.35rem 0 0;
+  }
+
+  /* ---- steps ---- */
+  #builder-{{ section.id }} .fb__step {
+    background: #fff;
+    border: var(--border-w) solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.3rem 1.2rem;
+    margin-bottom: 1.1rem;
+  }
+
+  #builder-{{ section.id }} .fb__step-title {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 1.15rem;
+    margin: 0 0 0.5rem;
+  }
+
+  #builder-{{ section.id }} .fb__step-num {
+    flex: none;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--pink);
+    color: var(--green-deep);
+    border: var(--border-w) solid var(--line);
+    display: grid;
+    place-items: center;
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  #builder-{{ section.id }} .fb__step-text { font-size: 0.95rem; opacity: 0.85; margin: 0 0 1rem; }
+
+  #builder-{{ section.id }} .fb__option { margin-bottom: 1.1rem; }
+  #builder-{{ section.id }} .fb__option:last-child { margin-bottom: 0; }
+  #builder-{{ section.id }} .fb__option-label {
+    display: flex;
+    gap: 0.4em;
+    align-items: baseline;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    margin-bottom: 0.55rem;
+  }
+  #builder-{{ section.id }} .fb__option-value { font-weight: 500; opacity: 0.75; font-size: 0.92rem; }
+
+  #builder-{{ section.id }} .fb__notice {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    background: rgba(var(--pink-rgb), 0.18);
+    border: var(--border-w) dashed var(--line);
+    border-radius: var(--radius-sm);
+    padding: 0.8rem 1rem;
+    font-size: 0.93rem;
+    font-weight: 600;
+    margin: 0 0 1.1rem;
+  }
+  #builder-{{ section.id }} .fb__notice svg { width: 18px; height: 18px; flex: none; color: var(--green); margin-top: 2px; }
+
+  #builder-{{ section.id }} .fb__frame-fields { margin-top: 1.1rem; }
+
+  #builder-{{ section.id }} .fb__line {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 1.1rem 0 0;
+    padding-top: 0.8rem;
+    border-top: 2px dashed rgba(var(--green-deep-rgb), 0.25);
+    font-size: 0.95rem;
+  }
+
+  /* ---- summary ---- */
+  #builder-{{ section.id }} .fb__summary {
+    background: var(--pink-soft);
+    border: var(--border-w) solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.3rem 1.2rem;
+    position: sticky;
+    bottom: 0.8rem;
+    z-index: 3;
+  }
+
+  #builder-{{ section.id }} .fb__summary-rows { display: grid; gap: 0.5rem; margin-bottom: 1rem; }
+  #builder-{{ section.id }} .fb__summary-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.95rem;
+  }
+  #builder-{{ section.id }} .fb__summary-row--total {
+    border-top: 2px dashed rgba(var(--green-deep-rgb), 0.35);
+    padding-top: 0.6rem;
+    margin-top: 0.2rem;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.3rem;
+  }
+
+  #builder-{{ section.id }} .fb__error {
+    background: #ffe3e8;
+    border: 2px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 0.7rem 0.9rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    margin: 0 0 0.9rem;
+  }
+
+  #builder-{{ section.id }} .fb__reassure {
+    text-align: center;
+    font-size: 0.86rem;
+    opacity: 0.8;
+    margin: 0.8rem 0 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    #builder-{{ section.id }} .fb__step { padding: 1.1rem 1rem; }
+    #builder-{{ section.id }} .fb__summary { padding: 1.1rem 1rem; }
+    #builder-{{ section.id }} .variant-options label { min-width: 48px; padding: 0.6rem 0.9rem; }
+  }
+</style>
+
+<script>
+  (function () {
+    var root = document.getElementById('builder-{{ section.id }}');
+    if (!root) return;
+
+    var wrap = root.querySelector('[data-frame-builder]');
+    if (!wrap || wrap.dataset.fbReady === 'true') return;
+    wrap.dataset.fbReady = 'true';
+
+    var moneyFormat = wrap.getAttribute('data-money-format') || '£{{ amount }}';
+    var cartUrl = wrap.getAttribute('data-cart-url') || '/cart';
+
+    var swatches = {};
+    try {
+      swatches = JSON.parse(
+        document.querySelector('[data-fb-swatches-{{ section.id }}]').textContent
+      );
+    } catch (e) { swatches = {}; }
+
+    function money(cents) {
+      var v = (cents / 100).toFixed(2).split('.');
+      var whole = v[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
+      return moneyFormat
+        .replace(/\{\{\s*amount\s*\}\}/g, whole + '.' + v[1])
+        .replace(/\{\{\s*amount_no_decimals\s*\}\}/g, whole);
+    }
+
+    function readJSON(sel) {
+      var el = root.querySelector(sel);
+      if (!el) return [];
+      try { return JSON.parse(el.textContent); } catch (e) { return []; }
+    }
+
+    var artVariants = readJSON('[data-fb-art-json]');
+    var frameVariants = readJSON('[data-fb-frame-json]');
+
+    function chosen(scopeAttr) {
+      var values = [];
+      root.querySelectorAll('[' + scopeAttr + ']').forEach(function (group) {
+        var checked = group.querySelector('input:checked');
+        values[parseInt(group.getAttribute(scopeAttr), 10)] = checked ? checked.value : null;
+        var out = group.querySelector('[data-fb-art-value], [data-fb-frame-value]');
+        if (out && checked) out.textContent = checked.value;
+      });
+      return values;
+    }
+
+    function match(list, values) {
+      if (!values.length) return list[0];
+      return list.find(function (v) {
+        return values.every(function (val, i) { return v.options[i] === val; });
+      });
+    }
+
+    var wantsFrame = function () {
+      var yes = root.querySelector('[data-fb-wants-frame][value="yes"]');
+      return !!(yes && yes.checked);
+    };
+
+    function update() {
+      var artV = match(artVariants, chosen('data-fb-art-index'));
+      var frameV = frameVariants.length ? match(frameVariants, chosen('data-fb-frame-index')) : null;
+      var withFrame = wantsFrame() && frameV;
+
+      var fields = root.querySelector('[data-fb-frame-fields]');
+      if (fields) fields.hidden = !wantsFrame();
+
+      // prices
+      var artPrice = artV ? artV.price : 0;
+      var framePrice = withFrame ? frameV.price : 0;
+
+      var setText = function (sel, txt) {
+        var el = root.querySelector(sel);
+        if (el) el.textContent = txt;
+      };
+      setText('[data-fb-art-price]', artV ? money(artPrice) : '—');
+      setText('[data-fb-sum-art]', artV ? money(artPrice) : '—');
+      setText('[data-fb-frame-price]', frameV ? money(frameV.price) : '—');
+      setText('[data-fb-sum-frame]', withFrame ? money(framePrice) : '—');
+      setText('[data-fb-total]', money(artPrice + framePrice));
+
+      var frameRow = root.querySelector('[data-fb-sum-frame-row]');
+      if (frameRow) frameRow.hidden = !withFrame;
+
+      // preview
+      var frameEl = root.querySelector('[data-fb-frame]');
+      var caption = root.querySelector('[data-fb-caption]');
+      if (frameEl) {
+        if (withFrame) {
+          frameEl.setAttribute('data-has-frame', 'true');
+          var swatch = null;
+          frameV.options.forEach(function (val) {
+            if (swatches[val]) swatch = swatches[val];
+          });
+          frameEl.style.setProperty('--frame-color', swatch ? swatch.color : '#d9c7a7');
+          frameEl.style.setProperty('--frame-width', (swatch && swatch.width ? swatch.width : 18) + 'px');
+          if (caption) caption.textContent = frameV.options.join(' · ');
+        } else {
+          frameEl.setAttribute('data-has-frame', 'false');
+          frameEl.style.setProperty('--frame-width', '0px');
+          if (caption) caption.textContent = {{ section.settings.caption_no_frame | json }};
+        }
+      }
+
+      // availability
+      var btn = root.querySelector('[data-fb-submit]');
+      var txt = root.querySelector('[data-fb-submit-text]');
+      var ok = artV && artV.available && (!withFrame || frameV.available);
+      if (btn) {
+        btn.disabled = !ok;
+        if (txt) txt.textContent = ok ? {{ section.settings.button_label | json }} : {{ section.settings.sold_out_label | json }};
+      }
+
+      root.fbState = { art: artV, frame: withFrame ? frameV : null };
+    }
+
+    root.addEventListener('change', function (e) {
+      if (e.target.matches('input[type="radio"]')) update();
+    });
+
+    function showError(msg) {
+      var el = root.querySelector('[data-fb-error]');
+      if (!el) return;
+      el.textContent = msg;
+      el.hidden = !msg;
+    }
+
+    var btn = root.querySelector('[data-fb-submit]');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        var state = root.fbState || {};
+        if (!state.art) { showError({{ section.settings.error_generic | json }}); return; }
+
+        var props = {};
+        var missing = null;
+        root.querySelectorAll('[data-fb-prop]').forEach(function (input) {
+          var name = input.getAttribute('data-fb-prop');
+          var val = (input.value || '').trim();
+          if (!val && input.hasAttribute('data-fb-required')) {
+            if (!missing) missing = input;
+            return;
+          }
+          if (val) props[name] = val;
+        });
+
+        if (missing) {
+          showError({{ section.settings.error_required | json }});
+          missing.focus();
+          missing.scrollIntoView({ block: 'center', behavior: 'smooth' });
+          return;
+        }
+        showError('');
+
+        var items = [{ id: state.art.id, quantity: 1, properties: props }];
+        if (state.frame) {
+          items.push({
+            id: state.frame.id,
+            quantity: 1,
+            properties: { {{ section.settings.frame_line_property | json }}: {{ section.settings.frame_line_value | json }} }
+          });
+        }
+
+        btn.disabled = true;
+        var txt = root.querySelector('[data-fb-submit-text]');
+        var original = txt ? txt.textContent : '';
+        if (txt) txt.textContent = {{ section.settings.adding_label | json }};
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ items: items })
+        })
+          .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+          .then(function (res) {
+            if (!res.ok) throw new Error(res.data && res.data.description ? res.data.description : 'add failed');
+            window.location.href = cartUrl;
+          })
+          .catch(function (err) {
+            btn.disabled = false;
+            if (txt) txt.textContent = original;
+            showError(err.message || {{ section.settings.error_generic | json }});
+          });
+      });
+    }
+
+    update();
+  })();
+</script>
+
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Frame & art builder",
+  "class": "frame-builder-section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Pick your artwork product and your frame product. The builder adds both to the basket in one go, as two separate lines."
+    },
+    { "type": "product", "id": "art_product", "label": "Artwork product" },
+    { "type": "product", "id": "frame_product", "label": "Frame product" },
+    { "type": "header", "content": "Wording" },
+    { "type": "text", "id": "subheading", "label": "Small label", "default": "Build yours" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your portrait, your frame" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Choose the artwork first, then pick a frame to go around it. Or take the digital file on its own and print it yourself.</p>" },
+    { "type": "text", "id": "step_art_title", "label": "Step 1 title", "default": "Choose your artwork" },
+    { "type": "textarea", "id": "step_art_text", "label": "Step 1 text", "default": "One pet to start, and every extra pet adds a little. Background is entirely up to you." },
+    { "type": "text", "id": "step_frame_title", "label": "Step 2 title", "default": "Add a frame" },
+    {
+      "type": "textarea",
+      "id": "frame_note",
+      "label": "The important note about frames",
+      "default": "Frames are sold empty. The artwork inside is whatever you chose in step one — the two arrive together, ready to put on the wall."
+    },
+    { "type": "text", "id": "frame_toggle_label", "label": "Frame question", "default": "Would you like a frame?" },
+    { "type": "text", "id": "no_frame_label", "label": "No-frame option", "default": "Digital file only" },
+    { "type": "text", "id": "yes_frame_label", "label": "Frame option", "default": "Framed & ready to hang" },
+    { "type": "text", "id": "step_details_title", "label": "Step 3 title", "default": "Tell me about your pet" },
+    { "type": "textarea", "id": "step_details_text", "label": "Step 3 text", "default": "The more you tell me, the more it will look like them." },
+    { "type": "header", "content": "Pet details fields" },
+    { "type": "checkbox", "id": "show_fields", "label": "Ask for pet details here", "default": true },
+    { "type": "text", "id": "pet_name_label", "label": "Pet name label", "default": "Pet name(s)" },
+    { "type": "text", "id": "pet_name_placeholder", "label": "Pet name placeholder", "default": "Milo, Bramble & Pickle" },
+    { "type": "text", "id": "instagram_label", "label": "Instagram label", "default": "Instagram username" },
+    { "type": "text", "id": "instagram_placeholder", "label": "Instagram placeholder", "default": "@yourname" },
+    { "type": "text", "id": "about_label", "label": "About your pet label", "default": "About your pet" },
+    { "type": "text", "id": "about_placeholder", "label": "About your pet placeholder", "default": "He is a very serious little sausage dog with one ear that never stands up." },
+    { "type": "header", "content": "Preview" },
+    { "type": "image_picker", "id": "preview_image", "label": "Preview artwork", "info": "The picture shown inside the frame. Falls back to your artwork product's photo." },
+    { "type": "color", "id": "stage_color", "label": "Wall colour behind the frame", "default": "#fff3f9" },
+    { "type": "color", "id": "mat_color", "label": "Mount colour inside the frame", "default": "#ffffff" },
+    { "type": "text", "id": "caption_no_frame", "label": "Caption with no frame", "default": "Digital file — print it yourself" },
+    { "type": "textarea", "id": "preview_note", "label": "Note under the preview", "default": "A preview of how it sits in the frame. Your own portrait goes here once it's drawn." },
+    { "type": "header", "content": "Basket" },
+    { "type": "text", "id": "total_label", "label": "Total label", "default": "Total" },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Add to basket" },
+    { "type": "text", "id": "adding_label", "label": "Button while adding", "default": "Adding..." },
+    { "type": "text", "id": "sold_out_label", "label": "Button when unavailable", "default": "Sold out" },
+    { "type": "text", "id": "error_required", "label": "Missing-field message", "default": "Please tell me your pet's name first." },
+    { "type": "text", "id": "error_generic", "label": "General error message", "default": "Something went wrong adding that. Please try again." },
+    { "type": "text", "id": "frame_line_property", "label": "Note shown on the frame basket line", "default": "Please note" },
+    { "type": "text", "id": "frame_line_value", "label": "Note text", "default": "Frame supplied empty — artwork ordered separately above" },
+    { "type": "textarea", "id": "reassurance", "label": "Reassurance under the button", "default": "Nothing gets drawn until we have talked about your photo. I email you as soon as you order." },
+    { "type": "header", "content": "Section" },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Background colour",
+      "options": [
+        { "value": "page", "label": "Page background" },
+        { "value": "white", "label": "White" },
+        { "value": "cream", "label": "Cream" },
+        { "value": "pinksoft", "label": "Soft pink" },
+        { "value": "pink", "label": "Bold pink" },
+        { "value": "green", "label": "Bold green" }
+      ],
+      "default": "cream"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 180, "step": 4, "unit": "px", "label": "Top padding", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 180, "step": 4, "unit": "px", "label": "Bottom padding", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "swatch",
+      "name": "Frame colour",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Option value",
+          "default": "Natural oak",
+          "info": "Must match the frame option value exactly, e.g. Natural oak."
+        },
+        { "type": "color", "id": "color", "label": "Colour in the preview", "default": "#c8a878" },
+        { "type": "range", "id": "width", "min": 8, "max": 40, "step": 2, "unit": "px", "label": "Frame thickness in the preview", "default": 18 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Frame & art builder",
+      "blocks": [{ "type": "swatch" }, { "type": "swatch" }, { "type": "swatch" }]
+    }
+  ]
+}
+{% endschema %}
