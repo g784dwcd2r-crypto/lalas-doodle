@@ -12,7 +12,9 @@
           }
         }
       },
-      "block_order": ["message"],
+      "block_order": [
+        "message"
+      ],
       "settings": {
         "color_scheme": "green",
         "text_size": 0.92,
@@ -29,9 +31,13 @@
         "border_width": 3,
         "show_search": true,
         "show_account": false,
-        "mobile_cta_text": "Order a portrait"
+        "mobile_cta_text": "Order a portrait",
+        "mobile_cta_link": "/collections/pet-portraits"
       }
     }
   },
-  "order": ["announcement-bar", "header"]
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
 }

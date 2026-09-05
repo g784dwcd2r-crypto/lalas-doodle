@@ -37,7 +37,7 @@
         "subtitle": "<p>Send me your favourite photo and I'll turn your pet into a bold, bright, hand-drawn portrait — the kind that makes you smile every single time you walk past it. Digital files, ready to print as big as your heart feels.</p>",
         "text_align": "left",
         "button_label": "Order your portrait",
-        "button_link": "/collections/all",
+        "button_link": "/collections/pet-portraits",
         "button_label_2": "See the gallery",
         "button_link_2": "#shopify-section-gallery",
         "image_position": "right",
@@ -110,10 +110,11 @@
         "columns": 3,
         "columns_mobile": 1,
         "button_label": "See everything",
-        "button_link": "/collections/all",
+        "button_link": "/collections/pet-portraits",
         "color_scheme": "page",
         "padding_top": 72,
-        "padding_bottom": 64
+        "padding_bottom": 64,
+        "collection": "pet-portraits"
       }
     },
     "how-it-works": {
@@ -165,7 +166,7 @@
         "text_align": "center",
         "columns": 4,
         "button_label": "Start my portrait",
-        "button_link": "/collections/all",
+        "button_link": "/collections/pet-portraits",
         "color_scheme": "pinksoft",
         "padding_top": 80,
         "padding_bottom": 80

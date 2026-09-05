@@ -3,47 +3,215 @@
     "banner": {
       "type": "rich-text",
       "blocks": {
-        "sub": { "type": "subheading", "settings": { "text": "🐾 the girl behind the doodles 🐾" } },
-        "head": { "type": "heading", "settings": { "text": "Hi, I'm Lala", "size": "h1" } },
-        "text": { "type": "text", "settings": { "text": "<p>I draw pets for a living, which is the softest sentence I have ever been able to say about myself. Here is how it happened — all of it, the sad bits and the silly bits, because they belong to each other.</p>", "size": 1.2 } }
+        "sub": {
+          "type": "subheading",
+          "settings": {
+            "text": "🐾 the girl behind the doodles 🐾"
+          }
+        },
+        "head": {
+          "type": "heading",
+          "settings": {
+            "text": "Hi, I'm Lala",
+            "size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>I draw pets for a living, which is the softest sentence I have ever been able to say about myself. Here is how it happened — all of it, the sad bits and the silly bits, because they belong to each other.</p>",
+            "size": 1.2
+          }
+        }
       },
-      "block_order": ["sub", "head", "text"],
-      "settings": { "text_align": "center", "narrow": true, "color_scheme": "pinksoft", "padding_top": 72, "padding_bottom": 64 }
+      "block_order": [
+        "sub",
+        "head",
+        "text"
+      ],
+      "settings": {
+        "text_align": "center",
+        "narrow": true,
+        "color_scheme": "pinksoft",
+        "padding_top": 72,
+        "padding_bottom": 64
+      }
     },
     "about": {
       "type": "about-lala",
       "blocks": {
-        "p1": { "type": "paragraph", "settings": { "text": "<p>I never planned to be someone who draws animals all day. I planned to be a girl with a warm little shadow at her feet — and for a long, lovely while, that's exactly what I was. She followed me from room to room. She sat outside the bathroom door like I might vanish if she blinked. She had opinions about the postman, strong feelings about cheese, and one ear that never quite learned to stand up straight. And every single time I cried, she put one paw on my knee, as if to say <em>I've got you, don't be silly, I'm right here.</em></p>" } },
-        "p2": { "type": "paragraph", "settings": { "text": "<p>When she passed away, the house went quiet in a way I didn't know a house could be. No little nails clicking across the kitchen floor. No sighing thump against the sofa at exactly nine o'clock. I kept finding her fur on my jumpers weeks afterwards and it undid me every single time. I would be absolutely fine, and then I'd open the cupboard where the treats lived, and I would not be fine at all.</p>" } },
-        "p3": { "type": "paragraph", "settings": { "text": "<p>One night I couldn't sleep, so I sat on the floor of my bedroom with my iPad and started drawing her. Badly. Through tears. Over and over, deleting more than I kept. It wasn't therapy and it wasn't art and it certainly wasn't a business plan. It was just the only way I could think of to keep her in the room with me for a bit longer.</p>" } },
-        "h1": { "type": "heading", "settings": { "text": "The drawing that changed everything" } },
-        "p4": { "type": "paragraph", "settings": { "text": "<p>That first portrait was wonky. Her ears came out far too big and I gave her a lopsided little smirk — which, to be fair, she absolutely did have. But when I finished it, something in my chest loosened for the first time in weeks. There she was. Not a photograph, not a memory going soft around the edges. <strong>Her.</strong> In bold lines and bright colour, looking faintly like she'd just stolen something off the kitchen counter and had no intention of apologising.</p>" } },
-        "p5": { "type": "paragraph", "settings": { "text": "<p>I posted it online without thinking much of it at all. Then a stranger asked if I would draw her cat. Then someone wanted their rabbit. Then a very old greyhound with a very silly name, then a hamster, then a horse, then a one-eyed rescue tabby called Nigel who I genuinely still think about. And that is how <strong>thefurdoodle</strong> quietly came to be: on a bedroom floor, out of grief first, and then — slowly, softly, almost without me noticing — out of pure joy.</p>" } },
-        "q1": { "type": "quote", "settings": { "text": "I don't draw pets. I draw the way you look at them." } },
-        "h2": { "type": "heading", "settings": { "text": "How I actually work" } },
-        "p6": { "type": "paragraph", "settings": { "text": "<p>I draw every portrait myself, by hand, from scratch, on an iPad in a studio that is far messier than the photos suggest. No tracing. No filters. No robots doing the difficult bit. I zoom in properly and go hunting for the things a photograph nearly misses — the eyebrow that lifts when they want something, the freckle on the nose, the fluff at the back of the neck that sticks up no matter how many times you brush it, the specific and unrepeatable shape of their particular face.</p>" } },
-        "p7": { "type": "paragraph", "settings": { "text": "<p>Then I send you a preview, because a portrait that isn't quite <em>them</em> is worse than no portrait at all. If the eyes aren't right, tell me. If I've made them look too serious when they are in fact a complete clown, tell me that too. Changing things is part of the price, never an extra. I would much rather redraw an ear three times than have you be politely disappointed forever.</p>" } },
-        "h3": { "type": "heading", "settings": { "text": "Why pink and green" } },
-        "p8": { "type": "paragraph", "settings": { "text": "<p>Because love is not a quiet, beige little thing, and your pet was certainly not beige. Your pet was ridiculous and loud and warm and completely, unreasonably yours. So the portraits I make are bright and cheerful and a bit cheeky — the kind of art that catches your eye from across the room and makes you smile before you've quite worked out why. Grief taught me a lot of things, but the most useful one was this: the way we remember them should feel like the way they actually were.</p>" } },
-        "h4": { "type": "heading", "settings": { "text": "For the ones who left" } },
-        "p9": { "type": "paragraph", "settings": { "text": "<p>Some of the pets I draw are snoring on a sofa right this second, entirely oblivious to being famous. Some of them left a long time ago. Both matter exactly the same to me. If yours has gone, you can tell me as much or as little as you'd like — a name, a habit, the daft way they said good morning, the walk you still take without them. I will hold it gently, I will not rush you, and I will draw them like they are still very much here. Because in every way that counts, they are.</p>" } },
-        "p10": { "type": "paragraph", "settings": { "text": "<p>If the only photos you have of them are old, grainy, half-blurred, taken on a phone from 2011 — send them anyway. Some of the portraits I am proudest of started life as a pixelated smudge that somebody loved very much.</p>" } },
-        "h5": { "type": "heading", "settings": { "text": "So, hello" } },
-        "p11": { "type": "paragraph", "settings": { "text": "<p>Send me your favourite photo. Tell me their name. Tell me the daft thing they do that makes you laugh out loud even on the grey days — the way they sit, the noise they make at the fridge, the fact they are afraid of one specific cushion. I'll take it from there, and I'll draw them like they are the most important animal in the entire world.</p>" } },
-        "p12": { "type": "paragraph", "settings": { "text": "<p>Because to you, they are. And honestly? To me as well. 🐾</p>" } },
-        "f1": { "type": "fact", "settings": { "emoji": "✏️", "heading": "Every line by hand", "text": "Drawn from scratch on my iPad. No tracing, no filters, no AI." } },
-        "f2": { "type": "fact", "settings": { "emoji": "💌", "heading": "I reply to everything", "text": "Every message comes straight to me. No teams, no bots, just Lala." } },
-        "f3": { "type": "fact", "settings": { "emoji": "🔍", "heading": "The tiny details", "text": "The wonky ear, the freckle, the eyebrow. That's the whole job." } },
-        "f4": { "type": "fact", "settings": { "emoji": "🫖", "heading": "Fuelled by tea", "text": "And an unreasonable number of photos of other people's pets." } }
+        "p1": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>I never planned to be someone who draws animals all day. I planned to be a girl with a warm little shadow at her feet — and for a long, lovely while, that's exactly what I was. She followed me from room to room. She sat outside the bathroom door like I might vanish if she blinked. She had opinions about the postman, strong feelings about cheese, and one ear that never quite learned to stand up straight. And every single time I cried, she put one paw on my knee, as if to say <em>I've got you, don't be silly, I'm right here.</em></p>"
+          }
+        },
+        "p2": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>When she passed away, the house went quiet in a way I didn't know a house could be. No little nails clicking across the kitchen floor. No sighing thump against the sofa at exactly nine o'clock. I kept finding her fur on my jumpers weeks afterwards and it undid me every single time. I would be absolutely fine, and then I'd open the cupboard where the treats lived, and I would not be fine at all.</p>"
+          }
+        },
+        "p3": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>One night I couldn't sleep, so I sat on the floor of my bedroom with my iPad and started drawing her. Badly. Through tears. Over and over, deleting more than I kept. It wasn't therapy and it wasn't art and it certainly wasn't a business plan. It was just the only way I could think of to keep her in the room with me for a bit longer.</p>"
+          }
+        },
+        "h1": {
+          "type": "heading",
+          "settings": {
+            "text": "The drawing that changed everything"
+          }
+        },
+        "p4": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>That first portrait was wonky. Her ears came out far too big and I gave her a lopsided little smirk — which, to be fair, she absolutely did have. But when I finished it, something in my chest loosened for the first time in weeks. There she was. Not a photograph, not a memory going soft around the edges. <strong>Her.</strong> In bold lines and bright colour, looking faintly like she'd just stolen something off the kitchen counter and had no intention of apologising.</p>"
+          }
+        },
+        "p5": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>I posted it online without thinking much of it at all. Then a stranger asked if I would draw her cat. Then someone wanted their rabbit. Then a very old greyhound with a very silly name, then a hamster, then a horse, then a one-eyed rescue tabby called Nigel who I genuinely still think about. And that is how <strong>thefurdoodle</strong> quietly came to be: on a bedroom floor, out of grief first, and then — slowly, softly, almost without me noticing — out of pure joy.</p>"
+          }
+        },
+        "q1": {
+          "type": "quote",
+          "settings": {
+            "text": "I don't draw pets. I draw the way you look at them."
+          }
+        },
+        "h2": {
+          "type": "heading",
+          "settings": {
+            "text": "How I actually work"
+          }
+        },
+        "p6": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>I draw every portrait myself, by hand, from scratch, on an iPad in a studio that is far messier than the photos suggest. No tracing. No filters. No robots doing the difficult bit. I zoom in properly and go hunting for the things a photograph nearly misses — the eyebrow that lifts when they want something, the freckle on the nose, the fluff at the back of the neck that sticks up no matter how many times you brush it, the specific and unrepeatable shape of their particular face.</p>"
+          }
+        },
+        "p7": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Then I send you a preview, because a portrait that isn't quite <em>them</em> is worse than no portrait at all. If the eyes aren't right, tell me. If I've made them look too serious when they are in fact a complete clown, tell me that too. Changing things is part of the price, never an extra. I would much rather redraw an ear three times than have you be politely disappointed forever.</p>"
+          }
+        },
+        "h3": {
+          "type": "heading",
+          "settings": {
+            "text": "Why pink and green"
+          }
+        },
+        "p8": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Because love is not a quiet, beige little thing, and your pet was certainly not beige. Your pet was ridiculous and loud and warm and completely, unreasonably yours. So the portraits I make are bright and cheerful and a bit cheeky — the kind of art that catches your eye from across the room and makes you smile before you've quite worked out why. Grief taught me a lot of things, but the most useful one was this: the way we remember them should feel like the way they actually were.</p>"
+          }
+        },
+        "h4": {
+          "type": "heading",
+          "settings": {
+            "text": "For the ones who left"
+          }
+        },
+        "p9": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Some of the pets I draw are snoring on a sofa right this second, entirely oblivious to being famous. Some of them left a long time ago. Both matter exactly the same to me. If yours has gone, you can tell me as much or as little as you'd like — a name, a habit, the daft way they said good morning, the walk you still take without them. I will hold it gently, I will not rush you, and I will draw them like they are still very much here. Because in every way that counts, they are.</p>"
+          }
+        },
+        "p10": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>If the only photos you have of them are old, grainy, half-blurred, taken on a phone from 2011 — send them anyway. Some of the portraits I am proudest of started life as a pixelated smudge that somebody loved very much.</p>"
+          }
+        },
+        "h5": {
+          "type": "heading",
+          "settings": {
+            "text": "So, hello"
+          }
+        },
+        "p11": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Send me your favourite photo. Tell me their name. Tell me the daft thing they do that makes you laugh out loud even on the grey days — the way they sit, the noise they make at the fridge, the fact they are afraid of one specific cushion. I'll take it from there, and I'll draw them like they are the most important animal in the entire world.</p>"
+          }
+        },
+        "p12": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Because to you, they are. And honestly? To me as well. 🐾</p>"
+          }
+        },
+        "f1": {
+          "type": "fact",
+          "settings": {
+            "emoji": "✏️",
+            "heading": "Every line by hand",
+            "text": "Drawn from scratch on my iPad. No tracing, no filters, no AI."
+          }
+        },
+        "f2": {
+          "type": "fact",
+          "settings": {
+            "emoji": "💌",
+            "heading": "I reply to everything",
+            "text": "Every message comes straight to me. No teams, no bots, just Lala."
+          }
+        },
+        "f3": {
+          "type": "fact",
+          "settings": {
+            "emoji": "🔍",
+            "heading": "The tiny details",
+            "text": "The wonky ear, the freckle, the eyebrow. That's the whole job."
+          }
+        },
+        "f4": {
+          "type": "fact",
+          "settings": {
+            "emoji": "🫖",
+            "heading": "Fuelled by tea",
+            "text": "And an unreasonable number of photos of other people's pets."
+          }
+        }
       },
-      "block_order": ["p1", "p2", "p3", "h1", "p4", "p5", "q1", "h2", "p6", "p7", "h3", "p8", "h4", "p9", "p10", "h5", "p11", "p12", "f1", "f2", "f3", "f4"],
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "h1",
+        "p4",
+        "p5",
+        "q1",
+        "h2",
+        "p6",
+        "p7",
+        "h3",
+        "p8",
+        "h4",
+        "p9",
+        "p10",
+        "h5",
+        "p11",
+        "p12",
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ],
       "settings": {
         "subheading": "",
         "heading": "The whole story, then",
         "lead": "<p>This little shop began with one very good girl, a very quiet house, and a drawing I made at two in the morning because I couldn't bear to let her go.</p>",
         "signature": "Lala x",
         "button_label": "Have your pet drawn",
-        "button_link": "/collections/all",
+        "button_link": "/collections/pet-portraits",
         "tape_text": "me & my whole heart",
         "caption": "The one who started it all 🤍",
         "image_position": "left",
@@ -55,11 +223,30 @@
     "gallery": {
       "type": "gallery",
       "blocks": {
-        "g1": { "type": "artwork", "settings": { "caption": "The very first one" } },
-        "g2": { "type": "artwork", "settings": { "caption": "Studio chaos, most days" } },
-        "g3": { "type": "artwork", "settings": { "caption": "Work in progress" } }
+        "g1": {
+          "type": "artwork",
+          "settings": {
+            "caption": "The very first one"
+          }
+        },
+        "g2": {
+          "type": "artwork",
+          "settings": {
+            "caption": "Studio chaos, most days"
+          }
+        },
+        "g3": {
+          "type": "artwork",
+          "settings": {
+            "caption": "Work in progress"
+          }
+        }
       },
-      "block_order": ["g1", "g2", "g3"],
+      "block_order": [
+        "g1",
+        "g2",
+        "g3"
+      ],
       "settings": {
         "subheading": "Behind the scenes",
         "heading": "Bits and pieces from the studio",
@@ -76,12 +263,41 @@
     "cta": {
       "type": "rich-text",
       "blocks": {
-        "head": { "type": "heading", "settings": { "text": "Shall we draw yours?", "size": "h2" } },
-        "text": { "type": "text", "settings": { "text": "<p>One pet is £35, and every extra pet is £7. Send me a photo whenever you're ready — there's no rush, and there's never any pressure.</p>", "size": 1.15 } },
-        "btn": { "type": "button", "settings": { "label": "Order a portrait", "link": "/collections/all", "style": "solid" } }
+        "head": {
+          "type": "heading",
+          "settings": {
+            "text": "Shall we draw yours?",
+            "size": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>One pet is £35, and every extra pet is £7. Send me a photo whenever you're ready — there's no rush, and there's never any pressure.</p>",
+            "size": 1.15
+          }
+        },
+        "btn": {
+          "type": "button",
+          "settings": {
+            "label": "Order a portrait",
+            "link": "/collections/pet-portraits",
+            "style": "solid"
+          }
+        }
       },
-      "block_order": ["head", "text", "btn"],
-      "settings": { "text_align": "center", "narrow": true, "color_scheme": "pink", "padding_top": 80, "padding_bottom": 80 }
+      "block_order": [
+        "head",
+        "text",
+        "btn"
+      ],
+      "settings": {
+        "text_align": "center",
+        "narrow": true,
+        "color_scheme": "pink",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     },
     "newsletter": {
       "type": "newsletter",
@@ -97,5 +313,11 @@
       }
     }
   },
-  "order": ["banner", "about", "gallery", "cta", "newsletter"]
+  "order": [
+    "banner",
+    "about",
+    "gallery",
+    "cta",
+    "newsletter"
+  ]
 }
