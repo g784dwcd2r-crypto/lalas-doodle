@@ -542,6 +542,8 @@
         "s3"
       ],
       "settings": {
+        "art_product": "custom-digital-pet-portrait",
+        "frame_product": "frame-ready-to-hang",
         "subheading": "Build yours",
         "heading": "Your portrait, your frame",
         "text": "<p>Choose the artwork first, then pick a frame to go around it — or take the digital file on its own and print it yourself.</p>",
