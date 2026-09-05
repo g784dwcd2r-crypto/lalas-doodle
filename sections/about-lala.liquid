@@ -1,0 +1,183 @@
+<div class="section scheme-{{ section.settings.color_scheme }}"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+  <div class="page-width">
+    <div class="about about--image-{{ section.settings.image_position }} reveal">
+
+      <div class="about__media">
+        {%- if section.settings.tape_text != blank -%}
+          <span class="about__tape">{{ section.settings.tape_text }}</span>
+        {%- endif -%}
+
+        <div class="about__portrait">
+          {%- if section.settings.image != blank -%}
+            <img
+              src="{{ section.settings.image | image_url: width: 900 }}"
+              srcset="{{ section.settings.image | image_url: width: 450 }} 450w, {{ section.settings.image | image_url: width: 900 }} 900w"
+              sizes="(min-width: 990px) 38vw, 92vw"
+              alt="{{ section.settings.image.alt | default: 'Lala in her studio' | escape }}"
+              width="{{ section.settings.image.width }}"
+              height="{{ section.settings.image.height }}"
+              loading="lazy">
+          {%- else -%}
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.caption != blank -%}
+          <p style="text-align: center; font-size: 0.9rem; opacity: 0.8; margin-top: 0.9rem;">{{ section.settings.caption }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="about__body">
+        {%- if section.settings.subheading != blank -%}
+          <span class="subheading" style="display: inline-block; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; font-size: 0.8rem; color: var(--pink); margin-bottom: 0.6rem;">
+            {{ section.settings.subheading }}
+          </span>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2>{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.lead != blank -%}
+          <div class="lead rte">{{ section.settings.lead }}</div>
+        {%- endif -%}
+
+        {%- assign fact_blocks = section.blocks | where: 'type', 'fact' -%}
+
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'paragraph' -%}
+              <div class="rte" style="margin-top: 1.1em;" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+
+            {%- when 'quote' -%}
+              <div class="about__quote" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+
+            {%- when 'heading' -%}
+              <h3 style="margin-top: 1.8em;" {{ block.shopify_attributes }}>{{ block.settings.text }}</h3>
+          {%- endcase -%}
+        {%- endfor -%}
+
+        {%- if fact_blocks.size > 0 -%}
+          <div class="about__facts">
+            {%- for block in fact_blocks -%}
+              <div class="about__fact" {{ block.shopify_attributes }}>
+                {%- if block.settings.emoji != blank -%}<span class="emoji">{{ block.settings.emoji }}</span>{%- endif -%}
+                <h4>{{ block.settings.heading }}</h4>
+                <p>{{ block.settings.text }}</p>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.signature != blank -%}
+          <p class="about__signature">{{ section.settings.signature }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          <a class="button button--large" href="{{ section.settings.button_link }}" style="margin-top: 1.4rem;">
+            {{ section.settings.button_label }}
+          </a>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Lala",
+  "class": "about-section",
+  "settings": [
+    { "type": "text", "id": "subheading", "label": "Small label", "default": "The girl behind the doodles" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Hi, I'm Lala 🌷" },
+    {
+      "type": "richtext",
+      "id": "lead",
+      "label": "Opening line",
+      "default": "<p>This whole little shop began with one very good girl, a very quiet house, and a drawing I made at 2am because I couldn't bear to let her go.</p>"
+    },
+    { "type": "text", "id": "signature", "label": "Signature", "default": "Lala x" },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Have your pet drawn" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "header", "content": "Photo" },
+    { "type": "image_picker", "id": "image", "label": "Photo of you (or your pet!)" },
+    { "type": "text", "id": "tape_text", "label": "Tape label on the photo", "default": "me & my whole heart" },
+    { "type": "text", "id": "caption", "label": "Caption under photo", "default": "The one who started it all 🤍" },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Photo position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    { "type": "header", "content": "Section" },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Background colour",
+      "options": [
+        { "value": "page", "label": "Page background" },
+        { "value": "white", "label": "White" },
+        { "value": "cream", "label": "Cream" },
+        { "value": "pinksoft", "label": "Soft pink" },
+        { "value": "pink", "label": "Bold pink" },
+        { "value": "green", "label": "Bold green" }
+      ],
+      "default": "page"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 180, "step": 4, "unit": "px", "label": "Top padding", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 180, "step": 4, "unit": "px", "label": "Bottom padding", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "paragraph",
+      "name": "Paragraph",
+      "settings": [{ "type": "richtext", "id": "text", "label": "Text", "default": "<p>Tell a little more of your story here.</p>" }]
+    },
+    {
+      "type": "heading",
+      "name": "Small heading",
+      "settings": [{ "type": "text", "id": "text", "label": "Heading", "default": "A little more about me" }]
+    },
+    {
+      "type": "quote",
+      "name": "Quote",
+      "settings": [{ "type": "text", "id": "text", "label": "Quote", "default": "I don't draw pets. I draw the way you look at them." }]
+    },
+    {
+      "type": "fact",
+      "name": "Little fact card",
+      "settings": [
+        { "type": "text", "id": "emoji", "label": "Emoji", "default": "🐾" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Every line by hand" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "No tracing, no filters, no shortcuts." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Lala",
+      "blocks": [
+        { "type": "paragraph", "settings": { "text": "<p>I never planned to be someone who draws animals all day. I planned to be a girl with a warm little shadow at her feet — and for a long, lovely while, that's exactly what I was. She followed me from room to room. She sat outside the bathroom door like I might vanish if she blinked. And every single time I cried, she put one paw on my knee, as if to say <em>I've got you, don't be silly, I'm right here.</em></p>" } },
+        { "type": "paragraph", "settings": { "text": "<p>When she passed away, the house went quiet in a way I didn't know a house could be. No little nails clicking on the kitchen floor. No sighing thump against the sofa at 9pm. I kept finding her fur on my jumpers weeks later, and it undid me every single time. One night I couldn't sleep, so I sat on the floor with my iPad and started drawing her. Badly. Through tears. Over and over. It was the only way I could think of to keep her in the room with me.</p>" } },
+        { "type": "paragraph", "settings": { "text": "<p>That first drawing was wonky. Her ears came out far too big and I gave her a lopsided little smirk — which, to be fair, she absolutely did have. But when I finished it, something in my chest loosened for the first time in weeks. There she was. Not a photograph. Not a memory going soft around the edges. <strong>Her</strong>, in bold lines and bright colour, looking faintly like she'd just stolen something off the counter.</p>" } },
+        { "type": "quote", "settings": { "text": "I don't draw pets. I draw the way you look at them." } },
+        { "type": "paragraph", "settings": { "text": "<p>I posted it online without thinking much of it at all. Then a stranger asked if I'd draw her cat. Then someone wanted their rabbit. Then a very old greyhound with a very silly name, then a hamster, then a horse, then a one-eyed rescue tabby who I still think about. And that is how <strong>thefurdoodle</strong> quietly came to be: on a bedroom floor, out of grief first, and then — slowly, softly — out of pure joy.</p>" } },
+        { "type": "paragraph", "settings": { "text": "<p>I draw every portrait myself, by hand, from scratch. No tracing. No filters. No robots. I zoom in properly and hunt for the things a photo nearly misses — the eyebrow that lifts when they want something, the one ear that never quite learned to stand up, the exact shape of the freckle on their nose, the fluff that sticks out at the back of the neck no matter how many times you brush it.</p>" } },
+        { "type": "paragraph", "settings": { "text": "<p>I work in bold pink and bold green because love is not a quiet, beige little thing. Your pet was not beige. Your pet was ridiculous and loud and warm and completely, unreasonably yours. So the portraits I make are bright and cheerful and a bit cheeky — the kind of art that catches your eye from across the room and makes you smile before you've even worked out why.</p>" } },
+        { "type": "paragraph", "settings": { "text": "<p>Some of the pets I draw are still snoring on the sofa right now, absolutely oblivious to being famous. Some of them left a long time ago. Both matter exactly the same to me. If yours has gone, you can tell me as much or as little as you'd like — a name, a habit, the way they said good morning. I'll hold it gently. I know precisely where you're standing, and I promise I'll draw them like they're still very much here, because in every way that counts, they are.</p>" } },
+        { "type": "paragraph", "settings": { "text": "<p>So: send me your favourite photo. Tell me their name. Tell me the daft thing they do that makes you laugh out loud even on the grey days. I'll take it from there, and I'll draw them like they're the most important animal in the entire world — because to you, they are. 🐾</p>" } },
+        { "type": "fact", "settings": { "emoji": "✏️", "heading": "Every line by hand", "text": "Drawn from scratch on my iPad. No tracing, no filters, no AI." } },
+        { "type": "fact", "settings": { "emoji": "💌", "heading": "I reply to everything", "text": "Every message comes straight to me. No teams, no bots, just Lala." } },
+        { "type": "fact", "settings": { "emoji": "🔍", "heading": "The tiny details", "text": "The wonky ear, the freckle, the eyebrow. That's the whole job." } },
+        { "type": "fact", "settings": { "emoji": "🫖", "heading": "Fuelled by tea", "text": "And an unreasonable number of photos of other people's pets." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

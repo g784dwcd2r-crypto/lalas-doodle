@@ -1,0 +1,31 @@
+<div class="section" style="--pt: 64px; --pb: 80px;">
+  <div class="page-width">
+    <div class="section-header text-center">
+      <h1>Hello {{ customer.first_name | default: 'there' }} 🐾</h1>
+      <p><a class="link-arrow" href="{{ routes.account_addresses_url }}">Your addresses</a> &nbsp;·&nbsp; <a class="link-arrow" href="{{ routes.account_logout_url }}">Log out</a></p>
+    </div>
+
+    <h2>Your orders</h2>
+    {%- if customer.orders.size > 0 -%}
+      <div style="overflow-x: auto;">
+        <table class="price-table" style="min-width: 560px;">
+          <thead><tr><th>Order</th><th>Date</th><th>Payment</th><th>Status</th><th>Total</th></tr></thead>
+          <tbody>
+            {%- for order in customer.orders -%}
+              <tr>
+                <td><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                <td>{{ order.created_at | date: '%d %b %Y' }}</td>
+                <td>{{ order.financial_status_label }}</td>
+                <td>{{ order.fulfillment_status_label }}</td>
+                <td>{{ order.total_price | money }}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+    {%- else -%}
+      <p>You haven't placed any orders yet.</p>
+      <a class="button" href="{{ routes.all_products_collection_url }}" style="margin-top: 1rem;">Find a portrait</a>
+    {%- endif -%}
+  </div>
+</div>

@@ -1,0 +1,16 @@
+{%- comment -%} Accepts: menu {%- endcomment -%}
+{%- assign links = menu.links -%}
+<ul class="nav-list">
+  {%- for link in links -%}
+    <li>
+      <a class="nav-link" href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
+      {%- if link.links.size > 0 -%}
+        <ul class="nav-dropdown">
+          {%- for child in link.links -%}
+            <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </li>
+  {%- endfor -%}
+</ul>

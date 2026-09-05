@@ -1,0 +1,137 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": { "type": "title", "settings": { "show_vendor": false, "rating_text": "Loved by hundreds of pet people" } },
+        "price": { "type": "price", "settings": { "note": "One pet £35 — add £7 for each extra pet. Digital file, so there's no postage to pay." } },
+        "variants": { "type": "variant_picker", "settings": {} },
+        "description": { "type": "description", "settings": {} },
+        "personalise": {
+          "type": "personalise",
+          "settings": {
+            "heading": "Tell me about your pet",
+            "intro": "The more you tell me, the more it'll look like them. None of this is a test — write as much or as little as you like.",
+            "show_pet_name": true,
+            "pet_name_label": "Pet name(s)",
+            "pet_name_placeholder": "Milo, Bramble & Pickle",
+            "pet_name_hint": "If you're ordering more than one pet, pop all their names in here.",
+            "pet_name_required": true,
+            "show_instagram": true,
+            "instagram_label": "Instagram username",
+            "instagram_placeholder": "@yourname",
+            "instagram_hint": "So I can send your photos back and tag you if you'd like me to share the finished piece.",
+            "instagram_required": false,
+            "show_description": true,
+            "description_label": "About your pet",
+            "description_placeholder": "Milo is a very serious little sausage dog with one ear that never stands up. He hates the postman and loves cheese.",
+            "description_hint": "Breed, colours, funny habits, anything you'd like me to include — or leave out.",
+            "description_maxlength": 600,
+            "description_required": false,
+            "photo_note": "📸 After you order, you'll get an email from me — just reply with your favourite photos and I'll get started."
+          }
+        },
+        "buy": { "type": "buy_buttons", "settings": { "show_quantity": false, "show_dynamic_checkout": true } },
+        "trust": {
+          "type": "trust",
+          "settings": {
+            "items": "Drawn by hand — never traced, never AI\nPreview sent before anything is final\nHigh-resolution files, yours to print forever\nUsually ready in 3-5 days"
+          }
+        },
+        "pricing": {
+          "type": "price_table",
+          "settings": { "heading": "How pricing works", "price_1": "£35", "price_2": "£42", "price_3": "£49", "price_extra": "+£7" }
+        },
+        "acc1": {
+          "type": "accordion",
+          "settings": {
+            "heading": "What you'll receive",
+            "content": "<p>A high-resolution digital file (JPEG and PNG), emailed straight to you. It's yours to print as many times as you like, at any size — a small desk frame, a big statement print, a mug, a tote, a card for the pet's other favourite human.</p><p>Personal use is completely yours. If you'd like to use your portrait commercially, just message me first and we'll sort it out.</p>",
+            "open": false
+          }
+        },
+        "acc2": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Sending me your photos",
+            "content": "<p>As soon as you order, I'll email you. Reply with your favourite photos — clear, well lit, taken at their eye level if you can manage it. Two or three options are ideal so I can pick the one that draws best.</p><p>Old or blurry photos are welcome too, especially for pets who have passed away. Send them and I'll always tell you honestly what I can do.</p>",
+            "open": false
+          }
+        },
+        "acc3": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Timings & changes",
+            "content": "<p>Most portraits are finished within 3-5 days. You'll see a preview before anything is final, and I'll happily tweak it until it feels like them — that's part of the price, not an extra.</p><p>Need it for a birthday or an anniversary? Tell me the date in your order notes and I'll do my very best.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": ["title", "price", "variants", "description", "personalise", "buy", "trust", "pricing", "acc1", "acc2", "acc3"],
+      "settings": {
+        "button_label": "Add to basket",
+        "sticky_info": true,
+        "image_ratio": "square",
+        "padding_top": 48,
+        "padding_bottom": 56
+      }
+    },
+    "product-reviews": {
+      "type": "reviews",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "rating": "5", "title": "I actually cried", "body": "<p>I sent Lala one slightly blurry photo and she somehow captured every single thing about him — the wonky ear, the eyebrows, the look he gives me when dinner is late. It's hanging in the hallway and I smile at it every day.</p>", "author": "Sophie R.", "pet_name": "Milo", "date": "March 2026", "verified": true, "product_handles": "" } },
+        "r2": { "type": "review", "settings": { "rating": "5", "title": "The perfect memorial", "body": "<p>We lost our girl last winter and I couldn't look at photos without falling apart. Somehow the drawing is different — it's bright and happy and so completely her. It's the first thing that made me smile instead of cry.</p>", "author": "Daniel K.", "pet_name": "Bess", "date": "February 2026", "verified": true, "product_handles": "" } },
+        "r3": { "type": "review", "settings": { "rating": "5", "title": "Both cats, finally together", "body": "<p>My two have never once sat still in the same room, so getting them in one portrait felt impossible. Lala drew them from two separate photos and you'd swear they'd posed for it. Worth every penny.</p>", "author": "Amira T.", "pet_name": "Bramble & Pickle", "date": "January 2026", "verified": true, "product_handles": "" } }
+      },
+      "block_order": ["r1", "r2", "r3"],
+      "settings": {
+        "subheading": "Kind words",
+        "heading": "Reviews for this portrait",
+        "text_align": "center",
+        "filter_to_product": true,
+        "columns": 3,
+        "show_images": true,
+        "image_ratio": "square",
+        "show_summary": true,
+        "color_scheme": "cream",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "how-it-works": {
+      "type": "how-it-works",
+      "blocks": {
+        "b1": { "type": "step", "settings": { "icon": "📸", "heading": "Send me a photo", "text": "Pick a photo where their personality shines through. A phone snap is perfect." } },
+        "b2": { "type": "step", "settings": { "icon": "🎨", "heading": "I start doodling", "text": "Every line by hand, matching their markings, their ears, that one wonky whisker." } },
+        "b3": { "type": "step", "settings": { "icon": "💌", "heading": "You see a preview", "text": "I send a first look and tweak anything you'd like changed." } },
+        "b4": { "type": "step", "settings": { "icon": "🖼", "heading": "Files in your inbox", "text": "High-resolution files, ready to print at any size you fancy." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"],
+      "settings": {
+        "subheading": "Easy as a belly rub",
+        "heading": "What happens after you order",
+        "text": "",
+        "text_align": "center",
+        "columns": 4,
+        "button_label": "",
+        "color_scheme": "page",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "emoji": "💌",
+        "heading": "Join the doodle post",
+        "text": "<p>New artwork, studio nonsense, and little discounts for the people who make this possible.</p>",
+        "button_label": "Sign me up",
+        "footnote": "Unsubscribe any time. Your pet won't be offended.",
+        "color_scheme": "green",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": ["main", "product-reviews", "how-it-works", "newsletter"]
+}

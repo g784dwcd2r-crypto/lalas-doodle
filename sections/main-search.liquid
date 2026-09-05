@@ -1,0 +1,45 @@
+{%- paginate search.results by 12 -%}
+<div class="section" style="--pt: 56px; --pb: 72px;">
+  <div class="page-width">
+    <div class="section-header text-center reveal">
+      <h1>Search</h1>
+      <form action="{{ routes.search_url }}" method="get" role="search" style="max-width: 520px; margin: 1.4rem auto 0; display: flex; gap: 0.7rem;">
+        <label class="visually-hidden" for="SearchInput">Search</label>
+        <input id="SearchInput" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search for a doodle...">
+        <button type="submit" class="button">Go</button>
+      </form>
+    </div>
+
+    {%- if search.performed -%}
+      {%- if search.results_count > 0 -%}
+        <p class="text-center" style="margin-bottom: 2rem;">{{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %} for &ldquo;{{ search.terms }}&rdquo;</p>
+        <ul class="grid" style="--cols-desktop: 3; --cols-tablet: 2; --cols-mobile: 2;">
+          {%- for item in search.results -%}
+            <li>
+              {%- if item.object_type == 'product' -%}
+                {% render 'product-card', product: item %}
+              {%- elsif item.object_type == 'article' -%}
+                {% render 'article-card', article: item %}
+              {%- else -%}
+                <div class="card"><div class="card__body"><h3 class="card__title"><a href="{{ item.url }}">{{ item.title }}</a></h3></div></div>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+        {% render 'pagination', paginate: paginate %}
+      {%- else -%}
+        <div class="empty-state">
+          <span class="emoji">🔍</span>
+          <h2>Nothing found for &ldquo;{{ search.terms }}&rdquo;</h2>
+          <p>Try a different word, or have a browse instead.</p>
+          <a class="button" href="{{ routes.all_products_collection_url }}" style="margin-top: 1rem;">Browse everything</a>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>
+{%- endpaginate -%}
+
+{% schema %}
+{ "name": "Search", "settings": [] }
+{% endschema %}

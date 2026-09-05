@@ -1,0 +1,14 @@
+<div class="section" style="--pt: 64px; --pb: 80px;">
+  <div class="page-width" style="max-width: 520px;">
+    <div class="section-header text-center"><h1>Activate your account</h1><p>Choose a password to finish setting things up.</p></div>
+    <div class="inked" style="padding: 1.8rem;">
+      {%- form 'activate_customer_password' -%}
+        {%- if form.errors -%}<p class="form-status form-status--error">{{ form.errors | default_errors }}</p>{%- endif -%}
+        <div class="field"><label class="field__label" for="ActivatePassword">Password</label><input type="password" id="ActivatePassword" name="customer[password]" required></div>
+        <div class="field"><label class="field__label" for="ActivatePasswordConfirm">Confirm password</label><input type="password" id="ActivatePasswordConfirm" name="customer[password_confirmation]" required></div>
+        <button type="submit" class="button button--full">Activate account</button>
+        <button type="submit" name="decline" class="button button--full button--outline" style="margin-top: 0.8rem;">No thanks</button>
+      {%- endform -%}
+    </div>
+  </div>
+</div>

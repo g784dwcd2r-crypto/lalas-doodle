@@ -1,0 +1,103 @@
+<div class="section" style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+  <div class="page-width">
+    <div class="section-header text-center">
+      <h1>Your basket</h1>
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate data-cart-form>
+        {%- for item in cart.items -%}
+          <div class="cart-item">
+            <a class="cart-item__image media media--square" href="{{ item.url }}" aria-hidden="true" tabindex="-1">
+              {%- if item.image -%}
+                <img src="{{ item.image | image_url: width: 300 }}" alt="{{ item.title | escape }}" loading="lazy">
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </a>
+
+            <div>
+              <a class="cart-item__title" href="{{ item.url }}">{{ item.product.title }}</a>
+              {%- unless item.product.has_only_default_variant -%}
+                <div style="font-size: 0.9rem; opacity: 0.8;">{{ item.variant.title }}</div>
+              {%- endunless -%}
+
+              {%- if item.properties.size > 0 -%}
+                <dl class="cart-item__props">
+                  {%- for property in item.properties -%}
+                    {%- assign value = property.last | strip -%}
+                    {%- if value != blank and property.first != '_' -%}
+                      <div><dt>{{ property.first }}:</dt><dd>{{ value }}</dd></div>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </dl>
+              {%- endif -%}
+
+              <button type="button" class="cart-item__remove" data-cart-remove="{{ forloop.index }}" style="margin-top: 0.6rem;">Remove</button>
+            </div>
+
+            <div class="quantity" data-quantity style="margin-top: 0.6rem;">
+              <button type="button" data-quantity-change="-1" aria-label="Decrease quantity">&minus;</button>
+              <label class="visually-hidden" for="CartQty-{{ forloop.index }}">Quantity for {{ item.title }}</label>
+              <input id="CartQty-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric" data-cart-quantity="{{ forloop.index }}">
+              <button type="button" data-quantity-change="1" aria-label="Increase quantity">+</button>
+            </div>
+
+            <div style="font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem;">
+              {{ item.final_line_price | money }}
+            </div>
+          </div>
+        {%- endfor -%}
+
+        {%- if section.settings.show_note -%}
+          <div class="field" style="margin-top: 1.6rem; max-width: 520px;">
+            <label class="field__label" for="CartNote">{{ section.settings.note_label }}</label>
+            <textarea id="CartNote" name="note" placeholder="{{ section.settings.note_placeholder }}">{{ cart.note }}</textarea>
+          </div>
+        {%- endif -%}
+
+        <div class="cart-footer">
+          <div>
+            {%- if section.settings.footer_text != blank -%}
+              <div class="rte" style="font-size: 0.95rem; max-width: 46ch;">{{ section.settings.footer_text }}</div>
+            {%- endif -%}
+          </div>
+          <div>
+            <div class="cart-total"><span>Total</span><span>{{ cart.total_price | money }}</span></div>
+            <p style="text-align: right; font-size: 0.88rem; opacity: 0.75; margin: 0.3rem 0 1rem;">Taxes calculated at checkout.</p>
+            <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: flex-end;">
+              <button type="submit" name="update" class="button button--outline">Update</button>
+              <button type="submit" name="checkout" class="button button--large">{{ section.settings.checkout_label }}</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    {%- else -%}
+      <div class="empty-state">
+        <span class="emoji">🧺</span>
+        <h2>{{ section.settings.empty_heading }}</h2>
+        <p>{{ section.settings.empty_text }}</p>
+        <a class="button button--large" href="{{ routes.all_products_collection_url }}" style="margin-top: 1.4rem;">{{ section.settings.empty_button }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [
+    { "type": "text", "id": "checkout_label", "label": "Checkout button", "default": "Checkout" },
+    { "type": "checkbox", "id": "show_note", "label": "Show order notes box", "default": true },
+    { "type": "text", "id": "note_label", "label": "Notes label", "default": "Anything else I should know?" },
+    { "type": "text", "id": "note_placeholder", "label": "Notes placeholder", "default": "Deadlines, surprises, special requests..." },
+    { "type": "richtext", "id": "footer_text", "label": "Text beside the total", "default": "<p>Once you've checked out, I'll email you to collect your photos. Nothing gets drawn until we're both happy with the picture. 🐾</p>" },
+    { "type": "header", "content": "Empty basket" },
+    { "type": "text", "id": "empty_heading", "label": "Heading", "default": "Your basket is empty" },
+    { "type": "text", "id": "empty_text", "label": "Text", "default": "Which is a shame, because somewhere out there is a pet who deserves to be framed." },
+    { "type": "text", "id": "empty_button", "label": "Button", "default": "Find a portrait" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Top padding", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Bottom padding", "default": 72 }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,39 @@
+<div class="section" style="--pt: 64px; --pb: 80px;">
+  <div class="page-width">
+    <div class="section-header">
+      <h1>Order {{ order.name }}</h1>
+      <p>Placed {{ order.created_at | date: '%d %B %Y' }}</p>
+    </div>
+
+    <div style="overflow-x: auto;">
+      <table class="price-table" style="min-width: 640px;">
+        <thead><tr><th>Item</th><th>Details</th><th>Qty</th><th>Total</th></tr></thead>
+        <tbody>
+          {%- for line_item in order.line_items -%}
+            <tr>
+              <td>{{ line_item.title }}</td>
+              <td>
+                {%- if line_item.properties.size > 0 -%}
+                  <dl class="cart-item__props">
+                    {%- for property in line_item.properties -%}
+                      {%- assign value = property.last | strip -%}
+                      {%- if value != blank and property.first != '_' -%}
+                        <div><dt>{{ property.first }}:</dt><dd>{{ value }}</dd></div>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </dl>
+                {%- endif -%}
+              </td>
+              <td>{{ line_item.quantity }}</td>
+              <td>{{ line_item.final_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cart-total" style="margin-top: 1.6rem;"><span>Total</span><span>{{ order.total_price | money }}</span></div>
+
+    <p style="margin-top: 2rem;"><a class="button button--outline" href="{{ routes.account_url }}">Back to my account</a></p>
+  </div>
+</div>

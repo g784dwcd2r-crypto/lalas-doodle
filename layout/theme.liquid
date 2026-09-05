@@ -1,0 +1,154 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="theme-color" content="{{ settings.color_pink }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+      <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
+    {%- endif -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif -%}
+      {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    {% render 'meta-tags' %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    {%- if settings.google_fonts_url != blank -%}
+      <link rel="stylesheet" href="{{ settings.google_fonts_url }}">
+    {%- endif -%}
+
+    {{ content_for_header }}
+
+    {%- liquid
+      assign heading_family = settings.font_heading_family | default: 'Dosis'
+      assign body_family = settings.font_body_family | default: 'Dosis'
+      assign gutter = settings.page_gutter | default: 32
+      assign gutter_mobile = settings.page_gutter_mobile | default: 18
+      assign mobile_scale = settings.mobile_scale | default: 70 | divided_by: 100.0
+    -%}
+
+    <style>
+      :root {
+        --pink: {{ settings.color_pink }};
+        --green: {{ settings.color_green }};
+        --pink-soft: {{ settings.color_pink_soft }};
+        --green-deep: {{ settings.color_green_deep }};
+
+        --pink-rgb: {{ settings.color_pink.red }}, {{ settings.color_pink.green }}, {{ settings.color_pink.blue }};
+        --green-rgb: {{ settings.color_green.red }}, {{ settings.color_green.green }}, {{ settings.color_green.blue }};
+        --green-deep-rgb: {{ settings.color_green_deep.red }}, {{ settings.color_green_deep.green }}, {{ settings.color_green_deep.blue }};
+
+        --bg: {{ settings.color_background }};
+        --bg-alt: {{ settings.color_background_alt }};
+        --text: {{ settings.color_text }};
+        --heading: {{ settings.color_heading }};
+        --line: {{ settings.color_border }};
+        --sale: {{ settings.color_sale }};
+        --star: {{ settings.color_star }};
+
+        --btn-bg: {{ settings.color_button_bg }};
+        --btn-text: {{ settings.color_button_text }};
+        --btn-bg-hover: {{ settings.color_button_bg_hover }};
+        --btn-text-hover: {{ settings.color_button_text_hover }};
+        --btn-radius: {{ settings.button_radius }}px;
+        --btn-border: {{ settings.button_border_width }}px;
+        --btn-py: {{ settings.button_padding_y }}px;
+        --btn-px: {{ settings.button_padding_x }}px;
+        --btn-case: {{ settings.button_case }};
+        --btn-tracking: {{ settings.button_letter_spacing }}px;
+
+        --border-w: {{ settings.border_width }}px;
+        --radius: {{ settings.border_radius }}px;
+        --radius-sm: {{ settings.border_radius_small }}px;
+        --shadow-color: {{ settings.color_shadow }};
+        {%- if settings.shadow_enabled -%}
+        --shadow-x: {{ settings.shadow_offset }}px;
+        --shadow-y: {{ settings.shadow_offset }}px;
+        {%- else -%}
+        --shadow-x: 0px;
+        --shadow-y: 0px;
+        {%- endif -%}
+        --shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
+
+        --font-heading: "{{ heading_family }}", "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+        --font-body: "{{ body_family }}", "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+        --heading-weight: {{ settings.heading_weight }};
+        --heading-scale: {{ settings.heading_scale | divided_by: 100.0 }};
+        --heading-tracking: {{ settings.heading_letter_spacing }}px;
+        --heading-case: {{ settings.heading_case }};
+        --body-weight: {{ settings.body_weight }};
+        --body-scale: {{ settings.body_scale | divided_by: 100.0 }};
+        --body-line-height: {{ settings.body_line_height }};
+
+        --page-width: {{ settings.page_width }}px;
+        --gutter: {{ gutter }}px;
+        --grid-gap: {{ settings.grid_gap }}px;
+        --mobile-scale: {{ mobile_scale }};
+
+        --pattern-size: {{ settings.pattern_size }}px;
+        --pattern-opacity: {{ settings.pattern_opacity | divided_by: 100.0 }};
+      }
+
+      @media screen and (max-width: 749px) {
+        :root { --gutter: {{ gutter_mobile }}px; }
+      }
+
+      {%- if settings.blob_corners -%}
+      :root { --blob: 62% 38% 42% 58% / 48% 45% 55% 52%; }
+      {%- else -%}
+      :root { --blob: var(--radius); }
+      {%- endif -%}
+    </style>
+
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+      window.themeSettings = {
+        animations: {{ settings.animations_enabled | json }},
+        pawTrail: {{ settings.paw_cursor_trail | json }},
+        moneyFormat: {{ shop.money_format | json }}
+      };
+    </script>
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  </head>
+
+  <body class="template--{{ template.name | handle }}{% if settings.hover_lift %} hover-lift{% endif %}{% if settings.pattern_enabled %} has-pattern{% endif %}">
+    <a class="skip-link button" href="#MainContent">{{ 'accessibility.skip_to_text' | t }}</a>
+
+    {%- if settings.pattern_enabled -%}
+      <div class="page-pattern" aria-hidden="true"
+        style="
+          --pattern-url: url({% if settings.pattern_image %}{{ settings.pattern_image | image_url: width: 800 }}{% else %}{{ 'pattern-leaves.svg' | asset_url }}{% endif %});
+        "></div>
+    {%- endif -%}
+
+    {% sections 'header-group' %}
+
+    <main id="MainContent" class="main-content" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    <div class="paw-trail" aria-hidden="true"></div>
+
+    {%- if request.page_type == 'product' -%}
+      <script type="application/ld+json">{{ product | structured_data }}</script>
+    {%- endif -%}
+  </body>
+</html>

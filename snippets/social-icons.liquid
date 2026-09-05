@@ -1,0 +1,21 @@
+{%- capture social_html -%}
+  {%- if settings.social_instagram != blank -%}
+    <li><a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">{% render 'icon-instagram' %}</a></li>
+  {%- endif -%}
+  {%- if settings.social_tiktok != blank -%}
+    <li><a href="{{ settings.social_tiktok }}" target="_blank" rel="noopener" aria-label="TikTok">{% render 'icon-tiktok' %}</a></li>
+  {%- endif -%}
+  {%- if settings.social_facebook != blank -%}
+    <li><a href="{{ settings.social_facebook }}" target="_blank" rel="noopener" aria-label="Facebook">{% render 'icon-facebook' %}</a></li>
+  {%- endif -%}
+  {%- if settings.social_pinterest != blank -%}
+    <li><a href="{{ settings.social_pinterest }}" target="_blank" rel="noopener" aria-label="Pinterest">{% render 'icon-pinterest' %}</a></li>
+  {%- endif -%}
+  {%- if settings.social_etsy != blank -%}
+    <li><a href="{{ settings.social_etsy }}" target="_blank" rel="noopener" aria-label="Etsy">{% render 'icon-etsy' %}</a></li>
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if social_html != blank -%}
+  <ul class="social-list">{{ social_html }}</ul>
+{%- endif -%}

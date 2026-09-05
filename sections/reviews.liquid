@@ -1,0 +1,243 @@
+{%- comment -%}
+  Reviews you write yourself in the theme editor.
+
+  Each review is a block with its own image (the artwork you made for that
+  customer), a star rating, and an optional list of product handles.
+
+  - Leave "Show on these products" empty  -> the review shows everywhere.
+  - Type one or more product handles      -> the review only shows on those
+                                             product pages.
+{%- endcomment -%}
+
+{%- liquid
+  assign visible = ''
+  assign total = 0
+  assign sum = 0
+
+  for block in section.blocks
+    assign show = false
+    assign handles = block.settings.product_handles | strip
+
+    if handles == blank
+      assign show = true
+    elsif section.settings.filter_to_product == false
+      assign show = true
+    elsif product != blank
+      assign handle_list = handles | downcase | replace: ', ', ',' | replace: ' ,', ',' | strip | split: ','
+      if handle_list contains product.handle
+        assign show = true
+      endif
+    endif
+
+    if show
+      assign rating_number = block.settings.rating | times: 1
+      assign visible = visible | append: block.id | append: ','
+      assign total = total | plus: 1
+      assign sum = sum | plus: rating_number
+    endif
+  endfor
+
+  assign average = 0
+  if total > 0
+    assign average = sum | times: 1.0 | divided_by: total | round: 1
+  endif
+  assign average_stars = average | round
+-%}
+
+{%- if total > 0 -%}
+  <div class="section scheme-{{ section.settings.color_scheme }}" id="reviews-{{ section.id }}"
+    style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+    <span id="product-reviews" style="display: block; position: relative; top: -80px;"></span>
+    <div class="page-width">
+
+      <div class="section-header text-{{ section.settings.text_align }} reveal">
+        {%- if section.settings.subheading != blank -%}<span class="subheading">{{ section.settings.subheading }}</span>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+        {%- if section.settings.text != blank -%}<div class="rte section-header__text">{{ section.settings.text }}</div>{%- endif -%}
+      </div>
+
+      {%- if section.settings.show_summary -%}
+        <div class="reviews-summary reveal">
+          <span class="reviews-summary__score">{{ average }}</span>
+          <span>
+            {% render 'stars', rating: average_stars, size: 'lg' %}
+            <span class="reviews-summary__text" style="display: block; margin-top: 0.3rem;">
+              Based on {{ total }} lovely {% if total == 1 %}review{% else %}reviews{% endif %}
+            </span>
+          </span>
+          {%- if section.settings.summary_note != blank -%}
+            <span style="margin-left: auto; font-weight: 600;">{{ section.settings.summary_note }}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <ul class="grid reveal" style="--cols-desktop: {{ section.settings.columns }}; --cols-tablet: 2; --cols-mobile: 1; list-style: none;">
+        {%- for block in section.blocks -%}
+          {%- assign marker = block.id | append: ',' -%}
+          {%- if visible contains marker -%}
+            <li>
+              <article class="review-card lift" {{ block.shopify_attributes }}>
+                {%- if block.settings.image != blank and section.settings.show_images -%}
+                  <div class="review-card__media media media--{{ section.settings.image_ratio }}">
+                    <img
+                      src="{{ block.settings.image | image_url: width: 800 }}"
+                      srcset="{{ block.settings.image | image_url: width: 400 }} 400w, {{ block.settings.image | image_url: width: 800 }} 800w"
+                      sizes="(min-width: 990px) 380px, 92vw"
+                      alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+                      loading="lazy">
+                  </div>
+                {%- endif -%}
+
+                {% render 'stars', rating: block.settings.rating %}
+
+                {%- if block.settings.title != blank -%}
+                  <h3 class="review-card__title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+
+                {%- if block.settings.body != blank -%}
+                  <div class="review-card__body rte">{{ block.settings.body }}</div>
+                {%- endif -%}
+
+                <div class="review-card__meta">
+                  <span class="review-card__author">
+                    {{ block.settings.author }}
+                    {%- if block.settings.pet_name != blank -%}
+                      <span style="font-weight: 500; opacity: 0.8;"> &amp; {{ block.settings.pet_name }}</span>
+                    {%- endif -%}
+                  </span>
+                  <span style="display: flex; gap: 0.7rem; align-items: center;">
+                    {%- if block.settings.date != blank -%}<span style="opacity: 0.7;">{{ block.settings.date }}</span>{%- endif -%}
+                    {%- if block.settings.verified -%}
+                      <span class="review-card__verified">{% render 'icon-check' %} Verified</span>
+                    {%- endif -%}
+                  </span>
+                </div>
+              </article>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+
+      {%- if section.settings.button_label != blank -%}
+        <div class="text-center" style="margin-top: 2.6rem;">
+          <a class="button button--large" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Reviews",
+  "class": "reviews-section",
+  "max_blocks": 50,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Add a review below for each happy customer. Attach the artwork you drew for them, and use 'Show on these products' to keep a review on one specific product page."
+    },
+    { "type": "text", "id": "subheading", "label": "Small label", "default": "Kind words" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What people say about their doodles" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "" },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Heading alignment",
+      "options": [{ "value": "center", "label": "Centre" }, { "value": "left", "label": "Left" }],
+      "default": "center"
+    },
+    { "type": "header", "content": "Which reviews to show" },
+    {
+      "type": "checkbox",
+      "id": "filter_to_product",
+      "label": "Only show reviews for the product being viewed",
+      "default": true,
+      "info": "Turn this off to show every review (useful on the homepage or an 'all reviews' page). Reviews with no product handle always show."
+    },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "columns", "min": 1, "max": 4, "step": 1, "label": "Columns on desktop", "default": 3 },
+    { "type": "checkbox", "id": "show_images", "label": "Show the artwork image on each review", "default": true },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image shape",
+      "options": [
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "landscape", "label": "Landscape" },
+        { "value": "natural", "label": "Natural" }
+      ],
+      "default": "square"
+    },
+    { "type": "checkbox", "id": "show_summary", "label": "Show the average score at the top", "default": true },
+    { "type": "text", "id": "summary_note", "label": "Note beside the score", "default": "" },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "header", "content": "Section" },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Background colour",
+      "options": [
+        { "value": "page", "label": "Page background" },
+        { "value": "white", "label": "White" },
+        { "value": "cream", "label": "Cream" },
+        { "value": "pinksoft", "label": "Soft pink" },
+        { "value": "pink", "label": "Bold pink" },
+        { "value": "green", "label": "Bold green" }
+      ],
+      "default": "cream"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 180, "step": 4, "unit": "px", "label": "Top padding", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 180, "step": 4, "unit": "px", "label": "Bottom padding", "default": 72 }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "select",
+          "id": "rating",
+          "label": "Stars",
+          "options": [
+            { "value": "5", "label": "5 stars" },
+            { "value": "4", "label": "4 stars" },
+            { "value": "3", "label": "3 stars" },
+            { "value": "2", "label": "2 stars" },
+            { "value": "1", "label": "1 star" }
+          ],
+          "default": "5"
+        },
+        { "type": "text", "id": "title", "label": "Review title", "default": "I actually cried!" },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Review",
+          "default": "<p>I sent Lala one slightly blurry photo and she somehow captured every single thing about him — the wonky ear, the eyebrows, the look he gives me when dinner is late. It's hanging in the hallway and I smile at it every day.</p>"
+        },
+        { "type": "text", "id": "author", "label": "Customer name", "default": "Sophie R." },
+        { "type": "text", "id": "pet_name", "label": "Pet's name", "default": "Milo" },
+        { "type": "text", "id": "date", "label": "Date", "default": "March 2026" },
+        { "type": "checkbox", "id": "verified", "label": "Show 'Verified' tick", "default": true },
+        { "type": "header", "content": "The artwork" },
+        { "type": "image_picker", "id": "image", "label": "Artwork you made for them" },
+        { "type": "header", "content": "Where it appears" },
+        {
+          "type": "text",
+          "id": "product_handles",
+          "label": "Show on these products",
+          "info": "Product handles, separated by commas — e.g. custom-pet-portrait. Leave empty to show this review on every product."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews",
+      "blocks": [{ "type": "review" }, { "type": "review" }, { "type": "review" }]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,55 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "marquee-footer": {
+      "type": "marquee",
+      "blocks": {
+        "m1": { "type": "item", "settings": { "text": "Drawn by hand" } },
+        "m2": { "type": "item", "settings": { "text": "From £35" } },
+        "m3": { "type": "item", "settings": { "text": "Print it as big as you like" } },
+        "m4": { "type": "item", "settings": { "text": "Made with a lot of love" } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4"],
+      "settings": { "color_scheme": "pink", "separator": "paw", "speed": 34, "text_size": 1.3, "border_width": 3 }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "brand": {
+          "type": "brand",
+          "settings": {
+            "text": "<p>Hand-drawn digital portraits of the animals who make our lives softer. Drawn in Lala's little studio and sent straight to your inbox.</p>",
+            "show_social": true
+          }
+        },
+        "menu": { "type": "menu", "settings": { "heading": "Explore", "menu": "footer" } },
+        "text": {
+          "type": "text",
+          "settings": {
+            "heading": "Say hello",
+            "text": "<p>Questions about your portrait? Message me any time — I answer every single one myself, usually within a day.</p>"
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Doodle post",
+            "text": "Little bits of pet art, studio news and the occasional discount."
+          }
+        }
+      },
+      "block_order": ["brand", "menu", "text", "newsletter"],
+      "settings": {
+        "color_scheme": "pinksoft",
+        "padding_top": 24,
+        "padding_bottom": 12,
+        "border_width": 3,
+        "copyright_extra": "Every doodle drawn by hand, with love.",
+        "show_payment_icons": true,
+        "show_policy_links": true
+      }
+    }
+  },
+  "order": ["marquee-footer", "footer"]
+}

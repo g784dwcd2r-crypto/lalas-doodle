@@ -1,0 +1,35 @@
+<div class="section" style="--pt: 64px; --pb: 80px;">
+  <div class="page-width" style="max-width: 720px;">
+    <div class="section-header text-center"><h1>Your addresses</h1></div>
+
+    {%- paginate customer.addresses by 6 -%}
+      {%- for address in customer.addresses -%}
+        <div class="inked" style="padding: 1.2rem; margin-bottom: 1rem;">
+          {{ address | format_address }}
+          {%- form 'customer_address', address -%}
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="button button--small button--outline">Delete</button>
+          {%- endform -%}
+        </div>
+      {%- else -%}
+        <p class="text-center">No addresses saved yet.</p>
+      {%- endfor -%}
+      {% render 'pagination', paginate: paginate %}
+    {%- endpaginate -%}
+
+    <div class="inked" style="padding: 1.6rem; margin-top: 1.6rem;">
+      <h2 class="h3">Add a new address</h2>
+      {%- form 'customer_address', customer.new_address -%}
+        <div class="field"><label class="field__label" for="AddressFirstName">First name</label><input type="text" id="AddressFirstName" name="address[first_name]"></div>
+        <div class="field"><label class="field__label" for="AddressLastName">Last name</label><input type="text" id="AddressLastName" name="address[last_name]"></div>
+        <div class="field"><label class="field__label" for="AddressLine1">Address</label><input type="text" id="AddressLine1" name="address[address1]"></div>
+        <div class="field"><label class="field__label" for="AddressCity">City</label><input type="text" id="AddressCity" name="address[city]"></div>
+        <div class="field"><label class="field__label" for="AddressZip">Postcode</label><input type="text" id="AddressZip" name="address[zip]"></div>
+        <div class="field"><label class="field__label" for="AddressCountry">Country</label><select id="AddressCountry" name="address[country]">{{ country_option_tags }}</select></div>
+        <button type="submit" class="button button--full">Save address</button>
+      {%- endform -%}
+    </div>
+
+    <p class="text-center" style="margin-top: 1.4rem;"><a class="link-arrow" href="{{ routes.account_url }}">Back to my account</a></p>
+  </div>
+</div>

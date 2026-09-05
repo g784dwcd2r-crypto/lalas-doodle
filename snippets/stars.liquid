@@ -1,0 +1,11 @@
+{%- comment -%} Accepts: rating (1-5), size ('lg' optional), show_number {%- endcomment -%}
+{%- assign r = rating | default: 5 | plus: 0 -%}
+<span class="stars {% if size == 'lg' %}stars--lg{% endif %}" role="img" aria-label="{{ r }} out of 5 stars">
+  {%- for i in (1..5) -%}
+    {%- if i <= r -%}
+      {% render 'icon-star' %}
+    {%- else -%}
+      {% render 'icon-star', class: 'star--empty' %}
+    {%- endif -%}
+  {%- endfor -%}
+</span>

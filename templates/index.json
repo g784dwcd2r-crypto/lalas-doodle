@@ -1,0 +1,514 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "number": "500+",
+            "label": "happy pets drawn"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "number": "3-5",
+            "label": "days, start to finish"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "number": "100%",
+            "label": "drawn by hand"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "eyebrow": "Custom digital pet portraits",
+        "heading": "Your best friend, drawn with a whole lot of love",
+        "heading_size": "h0",
+        "subtitle": "<p>Send me your favourite photo and I'll turn your pet into a bold, bright, hand-drawn portrait — the kind that makes you smile every single time you walk past it. Digital files, ready to print as big as your heart feels.</p>",
+        "text_align": "left",
+        "button_label": "Order your portrait",
+        "button_link": "/collections/all",
+        "button_label_2": "See the gallery",
+        "button_link_2": "#shopify-section-gallery",
+        "image_position": "right",
+        "image_shape": "blob",
+        "image_ratio": "square",
+        "sticker_text": "From £35",
+        "sticker_position": "tr",
+        "color_scheme": "page",
+        "padding_top": 64,
+        "padding_bottom": 56
+      }
+    },
+    "marquee": {
+      "type": "marquee",
+      "blocks": {
+        "m1": {
+          "type": "item",
+          "settings": {
+            "text": "Hand drawn with love"
+          }
+        },
+        "m2": {
+          "type": "item",
+          "settings": {
+            "text": "Digital files in 3-5 days"
+          }
+        },
+        "m3": {
+          "type": "item",
+          "settings": {
+            "text": "From £35"
+          }
+        },
+        "m4": {
+          "type": "item",
+          "settings": {
+            "text": "Print as big as you like"
+          }
+        },
+        "m5": {
+          "type": "item",
+          "settings": {
+            "text": "Every pet welcome"
+          }
+        }
+      },
+      "block_order": [
+        "m1",
+        "m2",
+        "m3",
+        "m4",
+        "m5"
+      ],
+      "settings": {
+        "color_scheme": "green",
+        "separator": "paw",
+        "speed": 30,
+        "text_size": 1.4,
+        "border_width": 3
+      }
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "subheading": "Pick your favourite",
+        "heading": "Portraits, ready when you are",
+        "text": "<p>Choose your style, tell me about your pet, and I'll get drawing.</p>",
+        "text_align": "center",
+        "limit": 3,
+        "columns": 3,
+        "columns_mobile": 1,
+        "button_label": "See everything",
+        "button_link": "/collections/all",
+        "color_scheme": "page",
+        "padding_top": 72,
+        "padding_bottom": 64
+      }
+    },
+    "how-it-works": {
+      "type": "how-it-works",
+      "blocks": {
+        "b1": {
+          "type": "step",
+          "settings": {
+            "icon": "📸",
+            "heading": "Send me a photo",
+            "text": "Pick a photo where their personality shines through. A phone snap is perfect — good light is all I ask."
+          }
+        },
+        "b2": {
+          "type": "step",
+          "settings": {
+            "icon": "🎨",
+            "heading": "I start doodling",
+            "text": "I draw every line by hand, matching their markings, their ears, that one wonky whisker you love."
+          }
+        },
+        "b3": {
+          "type": "step",
+          "settings": {
+            "icon": "💌",
+            "heading": "You see a preview",
+            "text": "I send a first look and tweak anything you'd like changed. It has to feel like them."
+          }
+        },
+        "b4": {
+          "type": "step",
+          "settings": {
+            "icon": "🖼",
+            "heading": "Files in your inbox",
+            "text": "High-resolution files land in your email, ready to print at any size you fancy."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
+      "settings": {
+        "subheading": "Easy as a belly rub",
+        "heading": "How your portrait happens",
+        "text": "<p>Four little steps between your favourite photo and a portrait you'll want on every wall.</p>",
+        "text_align": "center",
+        "columns": 4,
+        "button_label": "Start my portrait",
+        "button_link": "/collections/all",
+        "color_scheme": "pinksoft",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "gallery": {
+      "type": "gallery",
+      "blocks": {
+        "g1": {
+          "type": "artwork",
+          "settings": {
+            "caption": "Milo, the world's most serious sausage dog"
+          }
+        },
+        "g2": {
+          "type": "artwork",
+          "settings": {
+            "caption": "Poppy, who has never once come when called"
+          }
+        },
+        "g3": {
+          "type": "artwork",
+          "settings": {
+            "caption": "Bramble & Pickle, partners in crime"
+          }
+        },
+        "g4": {
+          "type": "artwork",
+          "settings": {
+            "caption": "Nala, professional sunbeam finder"
+          }
+        },
+        "g5": {
+          "type": "artwork",
+          "settings": {
+            "caption": "Alfie, 14 years of very good boy"
+          }
+        },
+        "g6": {
+          "type": "artwork",
+          "settings": {
+            "caption": "Hazel, who believes she is a person"
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "g3",
+        "g4",
+        "g5",
+        "g6"
+      ],
+      "settings": {
+        "subheading": "The doodle wall",
+        "heading": "Some faces I've drawn lately",
+        "text": "<p>Every one of these belongs to somebody who loves them very much.</p>",
+        "text_align": "center",
+        "columns": 3,
+        "columns_mobile": 2,
+        "image_ratio": "square",
+        "full_width": false,
+        "color_scheme": "white",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "about": {
+      "type": "about-lala",
+      "blocks": {
+        "p1": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>I never planned to be someone who draws animals all day. I planned to be a girl with a warm little shadow at her feet — and for a long, lovely while, that's exactly what I was. She followed me from room to room, sat outside the bathroom door like I might vanish if she blinked, and every single time I cried she put one paw on my knee, as if to say <em>I've got you, don't be silly, I'm right here.</em></p>"
+          }
+        },
+        "p2": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>When she passed away, the house went quiet in a way I didn't know a house could be. One night I couldn't sleep, so I sat on the floor with my iPad and started drawing her. Badly. Through tears. Over and over. It was the only way I could think of to keep her in the room with me — and when I finally finished, something in my chest loosened for the first time in weeks.</p>"
+          }
+        },
+        "q1": {
+          "type": "quote",
+          "settings": {
+            "text": "I don't draw pets. I draw the way you look at them."
+          }
+        },
+        "p3": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Then a stranger asked if I'd draw her cat. Then someone's rabbit, then a very old greyhound with a very silly name. And that is how <strong>thefurdoodle</strong> quietly came to be: on a bedroom floor, out of grief first, and then — slowly, softly — out of pure joy.</p>"
+          }
+        },
+        "f1": {
+          "type": "fact",
+          "settings": {
+            "emoji": "✏️",
+            "heading": "Every line by hand",
+            "text": "Drawn from scratch on my iPad. No tracing, no filters, no AI."
+          }
+        },
+        "f2": {
+          "type": "fact",
+          "settings": {
+            "emoji": "💌",
+            "heading": "I reply to everything",
+            "text": "Every message comes straight to me. No teams, no bots, just Lala."
+          }
+        },
+        "f3": {
+          "type": "fact",
+          "settings": {
+            "emoji": "🔍",
+            "heading": "The tiny details",
+            "text": "The wonky ear, the freckle, the eyebrow. That's the whole job."
+          }
+        },
+        "f4": {
+          "type": "fact",
+          "settings": {
+            "emoji": "🫖",
+            "heading": "Fuelled by tea",
+            "text": "And an unreasonable number of photos of other people's pets."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "q1",
+        "p3",
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ],
+      "settings": {
+        "subheading": "The girl behind the doodles",
+        "heading": "Hi, I'm Lala 🌷",
+        "lead": "<p>This whole little shop began with one very good girl, a very quiet house, and a drawing I made at 2am because I couldn't bear to let her go.</p>",
+        "signature": "Lala x",
+        "button_label": "Read my whole story",
+        "button_link": "/pages/about",
+        "tape_text": "me & my whole heart",
+        "caption": "The one who started it all 🤍",
+        "image_position": "left",
+        "color_scheme": "page",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "rating": "5",
+            "title": "I actually cried",
+            "body": "<p>I sent Lala one slightly blurry photo and she somehow captured every single thing about him — the wonky ear, the eyebrows, the look he gives me when dinner is late. It's hanging in the hallway and I smile at it every day.</p>",
+            "author": "Sophie R.",
+            "pet_name": "Milo",
+            "date": "March 2026",
+            "verified": true
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "rating": "5",
+            "title": "The perfect memorial",
+            "body": "<p>We lost our girl last winter and I couldn't look at photos without falling apart. Somehow the drawing is different — it's bright and happy and so completely her. It's the first thing that made me smile instead of cry.</p>",
+            "author": "Daniel K.",
+            "pet_name": "Bess",
+            "date": "February 2026",
+            "verified": true
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "rating": "5",
+            "title": "Both cats, finally together",
+            "body": "<p>My two have never once sat still in the same room, so getting them in one portrait felt impossible. Lala drew them from two separate photos and you'd swear they'd posed for it. Worth every penny.</p>",
+            "author": "Amira T.",
+            "pet_name": "Bramble & Pickle",
+            "date": "January 2026",
+            "verified": true
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "settings": {
+        "subheading": "Kind words",
+        "heading": "What people say about their doodles",
+        "text_align": "center",
+        "filter_to_product": false,
+        "columns": 3,
+        "show_images": true,
+        "image_ratio": "square",
+        "show_summary": true,
+        "color_scheme": "cream",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "blog": {
+      "type": "blog-posts",
+      "settings": {
+        "subheading": "From the studio journal",
+        "heading": "Stories, tips & pet art things",
+        "text": "<p>Long reads about drawing animals, loving them, and keeping them close.</p>",
+        "text_align": "center",
+        "blog": "news",
+        "limit": 3,
+        "columns": 3,
+        "show_excerpt": true,
+        "show_date": true,
+        "button_label": "Read the journal",
+        "color_scheme": "page",
+        "padding_top": 80,
+        "padding_bottom": 72
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "What kind of photo should I send?",
+            "answer": "<p>Anything clear and well lit where you can see their face properly — a phone photo is absolutely perfect. Daylight near a window is my favourite. Try to get down to their eye level if you can, and send two or three options if you're torn. If you only have one photo of them and it isn't perfect, send it anyway. I have worked from some very blurry, very precious pictures and I will always tell you honestly what I can do.</p>",
+            "open": true
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "How long will it take?",
+            "answer": "<p>Most portraits are finished within 3-5 days. You'll get a preview before anything is final, and if something doesn't look quite like them, tell me — I'd much rather adjust it than have you nod politely at a drawing that isn't right.</p>",
+            "open": false
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "What exactly do I receive?",
+            "answer": "<p>A high-resolution digital file, sent straight to your email. It's yours to print as many times as you like, at whatever size you fancy — a little desk frame, a big statement print for the hallway, a mug, a tote bag, a birthday card for the pet's other favourite human.</p>",
+            "open": false
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Can you draw more than one pet together?",
+            "answer": "<p>Yes, and it's one of my favourite things to do. The first pet is £35 and each extra pet is £7. They don't need to be in the same photo — send me one good picture of each and I'll bring them together as if they'd posed nicely all along, which they never do.</p>",
+            "open": false
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "With or without a background?",
+            "answer": "<p>Both are lovely and both cost the same. Without a background, your pet floats on a clean colour — bold, graphic, very easy to frame. With a background, I add colour and shapes around them for something a bit more decorative. Not sure? Pick either and tell me in the notes; I'll advise honestly when I see your photo.</p>",
+            "open": false
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "Can I order a portrait of a pet who has passed away?",
+            "answer": "<p>Of course, and please know I'll treat it with real care. Tell me their name and anything you'd like me to know about them. If the only photos you have are old or grainy, send them anyway and we'll talk it through gently. These portraits mean an enormous amount to me to make.</p>",
+            "open": false
+          }
+        },
+        "q7": {
+          "type": "question",
+          "settings": {
+            "question": "Do you draw animals other than cats and dogs?",
+            "answer": "<p>Always. Rabbits, horses, hamsters, guinea pigs, birds, reptiles, one very handsome cow. If you love them, I'll draw them.</p>",
+            "open": false
+          }
+        },
+        "q8": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use my portrait on Instagram?",
+            "answer": "<p>Yes please, I'd love that! Use it as a profile picture, post it, print it, put it on a t-shirt for yourself. Personal use is all yours. If you'd like to use it commercially — for a business, a product you sell — just message me first and we'll sort it out.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8"
+      ],
+      "settings": {
+        "subheading": "Curious things",
+        "heading": "Questions people ask me",
+        "text": "<p>And if yours isn't here, just message me — I'd love to help.</p>",
+        "button_label": "Ask me anything",
+        "button_link": "/pages/contact",
+        "color_scheme": "white",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "emoji": "💌",
+        "heading": "Join the doodle post",
+        "text": "<p>New artwork, studio nonsense, and little discounts for the people who make this possible. No spam, ever — just pets.</p>",
+        "placeholder": "your@email.com",
+        "button_label": "Sign me up",
+        "footnote": "Unsubscribe any time. Your pet won't be offended.",
+        "color_scheme": "green",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "marquee",
+    "featured",
+    "how-it-works",
+    "gallery",
+    "about",
+    "reviews",
+    "blog",
+    "faq",
+    "newsletter"
+  ]
+}

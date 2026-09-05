@@ -1,0 +1,55 @@
+{%- if section.blocks.size > 0 -%}
+  <div class="announcement scheme-{{ section.settings.color_scheme }}"
+    style="border-bottom-width: {{ section.settings.border_width }}px; font-size: {{ section.settings.text_size }}rem;">
+    {%- for block in section.blocks limit: 1 -%}
+      <div {{ block.shopify_attributes }}>
+        {%- if block.settings.link != blank -%}
+          <a href="{{ block.settings.link }}">{{ block.settings.text }}</a>
+        {%- else -%}
+          {{ block.settings.text }}
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "class": "announcement-section",
+  "max_blocks": 1,
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour",
+      "options": [
+        { "value": "pink", "label": "Bold pink" },
+        { "value": "green", "label": "Bold green" },
+        { "value": "pinksoft", "label": "Soft pink" },
+        { "value": "deep", "label": "Deep green" },
+        { "value": "cream", "label": "Cream" }
+      ],
+      "default": "green"
+    },
+    { "type": "range", "id": "text_size", "min": 0.7, "max": 1.4, "step": 0.05, "unit": "rem", "label": "Text size", "default": 0.92 },
+    { "type": "range", "id": "border_width", "min": 0, "max": 8, "step": 1, "unit": "px", "label": "Bottom line thickness", "default": 3 }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Message",
+          "default": "🐾 Hand-drawn digital pet portraits — delivered to your inbox in 3–5 days 🐾"
+        },
+        { "type": "url", "id": "link", "label": "Link (optional)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Announcement bar", "blocks": [{ "type": "announcement" }] }]
+}
+{% endschema %}

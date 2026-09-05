@@ -1,0 +1,711 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "The Fur Doodle",
+    "theme_version": "1.0.0",
+    "theme_author": "Lala",
+    "theme_documentation_url": "https://thefurdoodle.com",
+    "theme_support_url": "https://thefurdoodle.com/pages/contact"
+  },
+  {
+    "name": "🎨 Brand colours",
+    "settings": [
+      {
+        "type": "header",
+        "content": "The two hero colours"
+      },
+      {
+        "type": "paragraph",
+        "content": "These two colours run through the whole shop — the logo, buttons, borders and doodles. Change them here and the entire site follows."
+      },
+      {
+        "type": "color",
+        "id": "color_pink",
+        "label": "Bold pink",
+        "default": "#ee8cc4"
+      },
+      {
+        "type": "color",
+        "id": "color_green",
+        "label": "Bold green",
+        "default": "#2e7a45"
+      },
+      {
+        "type": "color",
+        "id": "color_pink_soft",
+        "label": "Soft pink (backgrounds)",
+        "default": "#fbe0ef"
+      },
+      {
+        "type": "color",
+        "id": "color_green_deep",
+        "label": "Deep green (text + outlines)",
+        "default": "#17402a"
+      },
+      {
+        "type": "header",
+        "content": "Page colours"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Page background",
+        "default": "#fffaf6"
+      },
+      {
+        "type": "color",
+        "id": "color_background_alt",
+        "label": "Alternate background",
+        "default": "#fff3f9"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Body text",
+        "default": "#2a2320"
+      },
+      {
+        "type": "color",
+        "id": "color_heading",
+        "label": "Headings",
+        "default": "#17402a"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Borders and lines",
+        "default": "#17402a"
+      },
+      {
+        "type": "header",
+        "content": "Buttons"
+      },
+      {
+        "type": "color",
+        "id": "color_button_bg",
+        "label": "Button background",
+        "default": "#2e7a45"
+      },
+      {
+        "type": "color",
+        "id": "color_button_text",
+        "label": "Button text",
+        "default": "#fffaf6"
+      },
+      {
+        "type": "color",
+        "id": "color_button_bg_hover",
+        "label": "Button background (hover)",
+        "default": "#ee8cc4"
+      },
+      {
+        "type": "color",
+        "id": "color_button_text_hover",
+        "label": "Button text (hover)",
+        "default": "#17402a"
+      },
+      {
+        "type": "header",
+        "content": "Extras"
+      },
+      {
+        "type": "color",
+        "id": "color_sale",
+        "label": "Sale price",
+        "default": "#d3457f"
+      },
+      {
+        "type": "color",
+        "id": "color_star",
+        "label": "Review stars",
+        "default": "#ee8cc4"
+      }
+    ]
+  },
+  {
+    "name": "✏️ Typography",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "The shop uses Dosis — a round, friendly font. You can swap it for any Google Font by pasting a new link below."
+      },
+      {
+        "type": "text",
+        "id": "google_fonts_url",
+        "label": "Google Fonts link",
+        "default": "https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;600;700;800&display=swap",
+        "info": "Paste the href from Google Fonts. Leave as-is to keep Dosis."
+      },
+      {
+        "type": "text",
+        "id": "font_heading_family",
+        "label": "Heading font family",
+        "default": "Dosis"
+      },
+      {
+        "type": "text",
+        "id": "font_body_family",
+        "label": "Body font family",
+        "default": "Dosis"
+      },
+      {
+        "type": "header",
+        "content": "Headings"
+      },
+      {
+        "type": "range",
+        "id": "heading_scale",
+        "min": 80,
+        "max": 150,
+        "step": 5,
+        "unit": "%",
+        "label": "Heading size",
+        "default": 100
+      },
+      {
+        "type": "select",
+        "id": "heading_weight",
+        "label": "Heading weight",
+        "options": [
+          { "value": "500", "label": "Medium" },
+          { "value": "600", "label": "Semibold" },
+          { "value": "700", "label": "Bold" },
+          { "value": "800", "label": "Extra bold" }
+        ],
+        "default": "800"
+      },
+      {
+        "type": "range",
+        "id": "heading_letter_spacing",
+        "min": -3,
+        "max": 8,
+        "step": 0.5,
+        "unit": "px",
+        "label": "Heading letter spacing",
+        "default": 0
+      },
+      {
+        "type": "select",
+        "id": "heading_case",
+        "label": "Heading capitalisation",
+        "options": [
+          { "value": "none", "label": "As typed" },
+          { "value": "uppercase", "label": "UPPERCASE" },
+          { "value": "lowercase", "label": "lowercase" }
+        ],
+        "default": "none"
+      },
+      {
+        "type": "header",
+        "content": "Body text"
+      },
+      {
+        "type": "range",
+        "id": "body_scale",
+        "min": 80,
+        "max": 140,
+        "step": 5,
+        "unit": "%",
+        "label": "Body text size",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "body_line_height",
+        "min": 1.2,
+        "max": 2.2,
+        "step": 0.05,
+        "label": "Line height",
+        "default": 1.7
+      },
+      {
+        "type": "select",
+        "id": "body_weight",
+        "label": "Body weight",
+        "options": [
+          { "value": "300", "label": "Light" },
+          { "value": "400", "label": "Regular" },
+          { "value": "500", "label": "Medium" },
+          { "value": "600", "label": "Semibold" }
+        ],
+        "default": "500"
+      },
+      {
+        "type": "header",
+        "content": "Buttons and labels"
+      },
+      {
+        "type": "select",
+        "id": "button_case",
+        "label": "Button capitalisation",
+        "options": [
+          { "value": "none", "label": "As typed" },
+          { "value": "uppercase", "label": "UPPERCASE" }
+        ],
+        "default": "uppercase"
+      },
+      {
+        "type": "range",
+        "id": "button_letter_spacing",
+        "min": 0,
+        "max": 6,
+        "step": 0.5,
+        "unit": "px",
+        "label": "Button letter spacing",
+        "default": 1
+      }
+    ]
+  },
+  {
+    "name": "🖍 Borders & lines",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Every card, button and image in the shop is drawn with a hand-inked outline. Control the thickness, roundness and the little offset shadow here."
+      },
+      {
+        "type": "range",
+        "id": "border_width",
+        "min": 0,
+        "max": 8,
+        "step": 1,
+        "unit": "px",
+        "label": "Outline thickness",
+        "default": 3
+      },
+      {
+        "type": "range",
+        "id": "border_radius",
+        "min": 0,
+        "max": 60,
+        "step": 2,
+        "unit": "px",
+        "label": "Corner roundness",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "border_radius_small",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "Corner roundness — small items",
+        "default": 14
+      },
+      {
+        "type": "checkbox",
+        "id": "blob_corners",
+        "label": "Use wobbly 'blob' corners on images",
+        "default": true,
+        "info": "Organic, uneven corners like a hand-cut sticker."
+      },
+      {
+        "type": "header",
+        "content": "Offset shadow"
+      },
+      {
+        "type": "checkbox",
+        "id": "shadow_enabled",
+        "label": "Show offset shadow",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "shadow_offset",
+        "min": 0,
+        "max": 16,
+        "step": 1,
+        "unit": "px",
+        "label": "Shadow offset",
+        "default": 6
+      },
+      {
+        "type": "color",
+        "id": "color_shadow",
+        "label": "Shadow colour",
+        "default": "#17402a"
+      },
+      {
+        "type": "header",
+        "content": "Buttons"
+      },
+      {
+        "type": "range",
+        "id": "button_radius",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Button roundness",
+        "default": 50
+      },
+      {
+        "type": "range",
+        "id": "button_border_width",
+        "min": 0,
+        "max": 6,
+        "step": 1,
+        "unit": "px",
+        "label": "Button outline thickness",
+        "default": 3
+      },
+      {
+        "type": "range",
+        "id": "button_padding_y",
+        "min": 6,
+        "max": 30,
+        "step": 1,
+        "unit": "px",
+        "label": "Button height padding",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "button_padding_x",
+        "min": 10,
+        "max": 60,
+        "step": 2,
+        "unit": "px",
+        "label": "Button width padding",
+        "default": 32
+      }
+    ]
+  },
+  {
+    "name": "📐 Layout & spacing",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "min": 1000,
+        "max": 1600,
+        "step": 20,
+        "unit": "px",
+        "label": "Maximum page width",
+        "default": 1300
+      },
+      {
+        "type": "range",
+        "id": "page_gutter",
+        "min": 12,
+        "max": 60,
+        "step": 2,
+        "unit": "px",
+        "label": "Side padding (desktop)",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "page_gutter_mobile",
+        "min": 8,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "Side padding (mobile)",
+        "default": 18
+      },
+      {
+        "type": "range",
+        "id": "grid_gap",
+        "min": 8,
+        "max": 60,
+        "step": 2,
+        "unit": "px",
+        "label": "Gap between cards",
+        "default": 28
+      },
+      {
+        "type": "range",
+        "id": "mobile_scale",
+        "min": 50,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "Mobile spacing scale",
+        "default": 70,
+        "info": "Shrinks every section's top/bottom padding on phones."
+      }
+    ]
+  },
+  {
+    "name": "🐾 Logo & brand",
+    "settings": [
+      {
+        "type": "select",
+        "id": "logo_type",
+        "label": "Logo style",
+        "options": [
+          { "value": "wordmark", "label": "Built-in alternating pink & green wordmark" },
+          { "value": "image", "label": "My own uploaded image" }
+        ],
+        "default": "wordmark"
+      },
+      {
+        "type": "text",
+        "id": "logo_text",
+        "label": "Wordmark text",
+        "default": "thefurdoodle",
+        "info": "Each letter alternates between your pink and green."
+      },
+      {
+        "type": "checkbox",
+        "id": "logo_show_paw",
+        "label": "Show paw print in the logo",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "logo_paw_position",
+        "label": "Paw position",
+        "options": [
+          { "value": "left", "label": "Before the text" },
+          { "value": "right", "label": "After the text" },
+          { "value": "above", "label": "Above the text" }
+        ],
+        "default": "left"
+      },
+      {
+        "type": "select",
+        "id": "logo_start_color",
+        "label": "First letter colour",
+        "options": [
+          { "value": "pink", "label": "Pink" },
+          { "value": "green", "label": "Green" }
+        ],
+        "default": "pink"
+      },
+      {
+        "type": "range",
+        "id": "logo_font_size",
+        "min": 16,
+        "max": 60,
+        "step": 1,
+        "unit": "px",
+        "label": "Wordmark size (desktop)",
+        "default": 34
+      },
+      {
+        "type": "range",
+        "id": "logo_font_size_mobile",
+        "min": 14,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Wordmark size (mobile)",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "logo_letter_spacing",
+        "min": -2,
+        "max": 6,
+        "step": 0.5,
+        "unit": "px",
+        "label": "Wordmark letter spacing",
+        "default": -0.5
+      },
+      {
+        "type": "checkbox",
+        "id": "logo_wiggle",
+        "label": "Make letters wiggle on hover",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Uploaded logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "Logo image"
+      },
+      {
+        "type": "range",
+        "id": "logo_image_width",
+        "min": 60,
+        "max": 320,
+        "step": 5,
+        "unit": "px",
+        "label": "Logo width (desktop)",
+        "default": 170
+      },
+      {
+        "type": "range",
+        "id": "logo_image_width_mobile",
+        "min": 50,
+        "max": 220,
+        "step": 5,
+        "unit": "px",
+        "label": "Logo width (mobile)",
+        "default": 120
+      },
+      {
+        "type": "header",
+        "content": "Browser tab"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "32 x 32 px works best."
+      }
+    ]
+  },
+  {
+    "name": "🌸 Doodles & background",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "pattern_enabled",
+        "label": "Show the leafy pink & green pattern",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "pattern_image",
+        "label": "Pattern image",
+        "info": "Optional. Upload your own repeating pattern to replace the built-in one."
+      },
+      {
+        "type": "range",
+        "id": "pattern_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "Pattern strength",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "pattern_size",
+        "min": 80,
+        "max": 600,
+        "step": 20,
+        "unit": "px",
+        "label": "Pattern tile size",
+        "default": 260
+      },
+      {
+        "type": "header",
+        "content": "Little touches"
+      },
+      {
+        "type": "checkbox",
+        "id": "animations_enabled",
+        "label": "Fade sections in as you scroll",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "hover_lift",
+        "label": "Lift cards on hover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "paw_cursor_trail",
+        "label": "Leave paw prints when the mouse moves",
+        "default": false,
+        "info": "Playful, but a little busy. Off by default."
+      }
+    ]
+  },
+  {
+    "name": "🛍 Product cards",
+    "settings": [
+      {
+        "type": "select",
+        "id": "card_image_ratio",
+        "label": "Image shape",
+        "options": [
+          { "value": "square", "label": "Square" },
+          { "value": "portrait", "label": "Portrait" },
+          { "value": "landscape", "label": "Landscape" },
+          { "value": "natural", "label": "Natural" }
+        ],
+        "default": "square"
+      },
+      {
+        "type": "select",
+        "id": "card_text_align",
+        "label": "Text alignment",
+        "options": [
+          { "value": "left", "label": "Left" },
+          { "value": "center", "label": "Centre" }
+        ],
+        "default": "center"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_price",
+        "label": "Show price",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_vendor",
+        "label": "Show vendor",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "card_second_image",
+        "label": "Show second image on hover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_quick_add",
+        "label": "Show a quick 'View' button on hover",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "💌 Social & contact",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram URL",
+        "info": "https://instagram.com/yourname"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "TikTok URL"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest URL"
+      },
+      {
+        "type": "text",
+        "id": "social_etsy",
+        "label": "Etsy URL"
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Contact email"
+      },
+      {
+        "type": "header",
+        "content": "Sharing image"
+      },
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Default social sharing image"
+      }
+    ]
+  }
+]

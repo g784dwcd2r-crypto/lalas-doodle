@@ -1,0 +1,385 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+-%}
+
+<div class="section" style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+  <div class="page-width">
+    <div class="product">
+
+      {%- comment -%} ---------------- Gallery ---------------- {%- endcomment -%}
+      <div class="product__gallery" data-product-gallery>
+        <div class="product__main-image media media--{{ section.settings.image_ratio }}" data-gallery-main>
+          {%- if product.featured_media -%}
+            <img
+              src="{{ product.featured_media | image_url: width: 1400 }}"
+              srcset="{{ product.featured_media | image_url: width: 700 }} 700w, {{ product.featured_media | image_url: width: 1400 }} 1400w"
+              sizes="(min-width: 990px) 52vw, 92vw"
+              alt="{{ product.featured_media.alt | default: product.title | escape }}"
+              width="{{ product.featured_media.width }}"
+              height="{{ product.featured_media.height }}"
+              loading="eager"
+              fetchpriority="high">
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+
+        {%- if product.media.size > 1 -%}
+          <div class="product__thumbs">
+            {%- for media in product.media -%}
+              <button type="button" class="product__thumb"
+                data-gallery-thumb
+                data-full="{{ media | image_url: width: 1400 }}"
+                data-alt="{{ media.alt | escape }}"
+                aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+                aria-label="Show image {{ forloop.index }}">
+                <img src="{{ media | image_url: width: 240 }}" alt="" loading="lazy" width="240" height="240">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} ---------------- Info ---------------- {%- endcomment -%}
+      <div class="product__info {% if section.settings.sticky_info %}product__info--sticky{% endif %}">
+        {%- form 'product', product, id: 'ProductForm', class: 'product__form', novalidate: 'novalidate' -%}
+
+          <div data-variant-picker
+            data-add-text="{{ section.settings.button_label | escape }}"
+            data-sold-out-text="Sold out"
+            data-unavailable-text="Unavailable">
+
+            <script type="application/json" data-variant-json>
+              [
+                {%- for variant in product.variants -%}
+                  {
+                    "id": {{ variant.id }},
+                    "options": {{ variant.options | json }},
+                    "price": {{ variant.price }},
+                    "compare_at_price": {{ variant.compare_at_price | default: 0 }},
+                    "available": {{ variant.available | json }}
+                  }{% unless forloop.last %},{% endunless %}
+                {%- endfor -%}
+              ]
+            </script>
+
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+
+                {%- when 'title' -%}
+                  <div {{ block.shopify_attributes }}>
+                    {%- if block.settings.show_vendor and product.vendor != blank -%}
+                      <span class="card__vendor">{{ product.vendor }}</span>
+                    {%- endif -%}
+                    <h1 class="product__title">{{ product.title }}</h1>
+                    {%- if block.settings.rating_text != blank -%}
+                      <a class="product__rating-link" href="#product-reviews">
+                        {% render 'stars', rating: 5 %}
+                        <span>{{ block.settings.rating_text }}</span>
+                      </a>
+                    {%- endif -%}
+                  </div>
+
+                {%- when 'price' -%}
+                  <div {{ block.shopify_attributes }}>
+                    <div class="product__price">
+                      <span data-variant-price>{{ current_variant.price | money }}</span>
+                      <s class="price--compare" data-variant-compare {% unless current_variant.compare_at_price > current_variant.price %}hidden{% endunless %}>
+                        {{ current_variant.compare_at_price | money }}
+                      </s>
+                    </div>
+                    {%- if block.settings.note != blank -%}
+                      <p class="product__price-note">{{ block.settings.note }}</p>
+                    {%- endif -%}
+                  </div>
+
+                {%- when 'variant_picker' -%}
+                  {%- unless product.has_only_default_variant -%}
+                    <div {{ block.shopify_attributes }}>
+                      {%- for option in product.options_with_values -%}
+                        <div class="variant-group" data-option-index="{{ forloop.index0 }}">
+                          <div class="variant-group__label">
+                            <span>{{ option.name }}:</span>
+                            <span class="variant-group__value" data-option-value>{{ option.selected_value }}</span>
+                          </div>
+                          <div class="variant-options">
+                            {%- for value in option.values -%}
+                              {%- assign input_id = section.id | append: '-' | append: forloop.parentloop.index0 | append: '-' | append: forloop.index0 -%}
+                              <input
+                                type="radio"
+                                id="Option-{{ input_id }}"
+                                name="option-{{ forloop.parentloop.index0 }}-{{ section.id }}"
+                                value="{{ value | escape }}"
+                                {% if option.selected_value == value %}checked{% endif %}>
+                              <label for="Option-{{ input_id }}">{{ value }}</label>
+                            {%- endfor -%}
+                          </div>
+                        </div>
+                      {%- endfor -%}
+                    </div>
+                  {%- endunless -%}
+
+                {%- when 'price_table' -%}
+                  <div class="variant-group" {{ block.shopify_attributes }}>
+                    {%- if block.settings.heading != blank -%}
+                      <div class="variant-group__label"><span>{{ block.settings.heading }}</span></div>
+                    {%- endif -%}
+                    <table class="price-table">
+                      <tr><th>1 pet</th><td>{{ block.settings.price_1 }}</td></tr>
+                      <tr><th>2 pets</th><td>{{ block.settings.price_2 }}</td></tr>
+                      <tr><th>3 pets</th><td>{{ block.settings.price_3 }}</td></tr>
+                      <tr><th>Each extra pet</th><td>{{ block.settings.price_extra }}</td></tr>
+                    </table>
+                  </div>
+
+                {%- when 'description' -%}
+                  <div class="product__description rte" {{ block.shopify_attributes }}>
+                    {{ product.description }}
+                  </div>
+
+                {%- when 'personalise' -%}
+                  <div class="personalise" {{ block.shopify_attributes }}>
+                    <div class="personalise__title">
+                      {% render 'icon-paw', class: 'logo-paw', color: 'var(--pink)' %}
+                      {{ block.settings.heading }}
+                    </div>
+                    {%- if block.settings.intro != blank -%}
+                      <p class="personalise__intro">{{ block.settings.intro }}</p>
+                    {%- endif -%}
+
+                    {%- if block.settings.show_pet_name -%}
+                      <div class="field">
+                        <label class="field__label" for="PetName">
+                          {{ block.settings.pet_name_label }}
+                          {%- if block.settings.pet_name_required -%}<span class="required" aria-hidden="true">*</span>{%- endif -%}
+                        </label>
+                        <input type="text" id="PetName" name="properties[{{ block.settings.pet_name_label }}]"
+                          placeholder="{{ block.settings.pet_name_placeholder }}"
+                          {% if block.settings.pet_name_required %}required{% endif %}
+                          maxlength="120">
+                        {%- if block.settings.pet_name_hint != blank -%}
+                          <span class="field__hint">{{ block.settings.pet_name_hint }}</span>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+
+                    {%- if block.settings.show_instagram -%}
+                      <div class="field">
+                        <label class="field__label" for="Instagram">
+                          {{ block.settings.instagram_label }}
+                          {%- if block.settings.instagram_required -%}<span class="required" aria-hidden="true">*</span>{%- endif -%}
+                        </label>
+                        <input type="text" id="Instagram" name="properties[{{ block.settings.instagram_label }}]"
+                          placeholder="{{ block.settings.instagram_placeholder }}"
+                          {% if block.settings.instagram_required %}required{% endif %}
+                          maxlength="80" autocapitalize="off" spellcheck="false">
+                        {%- if block.settings.instagram_hint != blank -%}
+                          <span class="field__hint">{{ block.settings.instagram_hint }}</span>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+
+                    {%- if block.settings.show_description -%}
+                      <div class="field">
+                        <label class="field__label" for="PetDescription">
+                          {{ block.settings.description_label }}
+                          {%- if block.settings.description_required -%}<span class="required" aria-hidden="true">*</span>{%- endif -%}
+                        </label>
+                        <textarea id="PetDescription" name="properties[{{ block.settings.description_label }}]"
+                          placeholder="{{ block.settings.description_placeholder }}"
+                          maxlength="{{ block.settings.description_maxlength }}"
+                          data-char-count="PetDescriptionCount"
+                          {% if block.settings.description_required %}required{% endif %}></textarea>
+                        <span class="char-count" id="PetDescriptionCount"></span>
+                        {%- if block.settings.description_hint != blank -%}
+                          <span class="field__hint">{{ block.settings.description_hint }}</span>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+
+                    {%- if block.settings.photo_note != blank -%}
+                      <p class="field__hint" style="margin-top: 0.4rem;">{{ block.settings.photo_note }}</p>
+                    {%- endif -%}
+                  </div>
+
+                {%- when 'buy_buttons' -%}
+                  <div class="product__cta" {{ block.shopify_attributes }}>
+                    <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id>
+
+                    <div class="quantity-row">
+                      {%- if block.settings.show_quantity -%}
+                        <div class="quantity" data-quantity>
+                          <button type="button" data-quantity-change="-1" aria-label="Decrease quantity">&minus;</button>
+                          <label class="visually-hidden" for="Quantity">Quantity</label>
+                          <input id="Quantity" type="number" name="quantity" value="1" min="1" inputmode="numeric">
+                          <button type="button" data-quantity-change="1" aria-label="Increase quantity">+</button>
+                        </div>
+                      {%- endif -%}
+
+                      <button type="submit" name="add" class="button button--large button--full" data-add-to-cart
+                        {% unless current_variant.available %}disabled{% endunless %}>
+                        <span data-add-text>
+                          {%- if current_variant.available -%}{{ section.settings.button_label }}{%- else -%}Sold out{%- endif -%}
+                        </span>
+                      </button>
+                    </div>
+
+                    {%- if block.settings.show_dynamic_checkout -%}
+                      {{ form | payment_button }}
+                    {%- endif -%}
+                  </div>
+
+                {%- when 'trust' -%}
+                  <div class="product__trust" {{ block.shopify_attributes }}>
+                    <ul>
+                      {%- assign items = block.settings.items | newline_to_br | split: '<br />' -%}
+                      {%- for item in items -%}
+                        {%- assign line = item | strip -%}
+                        {%- if line != blank -%}
+                          <li>{% render 'icon-check' %}<span>{{ line }}</span></li>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+
+                {%- when 'accordion' -%}
+                  <details class="accordion" {% if block.settings.open %}open{% endif %} {{ block.shopify_attributes }}>
+                    <summary>{{ block.settings.heading }}</summary>
+                    <div class="accordion__content rte">{{ block.settings.content }}</div>
+                  </details>
+
+                {%- when 'text' -%}
+                  <div class="rte" style="margin-bottom: 1.4rem;" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+        {%- endform -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product page",
+  "class": "main-product-section",
+  "settings": [
+    { "type": "text", "id": "button_label", "label": "Add to basket button text", "default": "Add to basket" },
+    { "type": "checkbox", "id": "sticky_info", "label": "Keep the details visible while scrolling (desktop)", "default": true },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Main image shape",
+      "options": [
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "landscape", "label": "Landscape" },
+        { "value": "natural", "label": "Natural" }
+      ],
+      "default": "square"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Top padding", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Bottom padding", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": [
+        { "type": "checkbox", "id": "show_vendor", "label": "Show vendor", "default": false },
+        { "type": "text", "id": "rating_text", "label": "Text next to stars", "default": "Loved by hundreds of pet people" }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "note", "label": "Note under the price", "default": "One pet £35 — add £7 for each extra pet. Digital file, no postage to pay." }
+      ]
+    },
+    { "type": "variant_picker", "name": "Options (pets & background)", "limit": 1, "settings": [] },
+    {
+      "type": "price_table",
+      "name": "Price table",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "How pricing works" },
+        { "type": "text", "id": "price_1", "label": "1 pet", "default": "£35" },
+        { "type": "text", "id": "price_2", "label": "2 pets", "default": "£42" },
+        { "type": "text", "id": "price_3", "label": "3 pets", "default": "£49" },
+        { "type": "text", "id": "price_extra", "label": "Each extra pet", "default": "+£7" }
+      ]
+    },
+    { "type": "description", "name": "Description", "limit": 1, "settings": [] },
+    {
+      "type": "personalise",
+      "name": "Personalisation fields",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Tell me about your pet" },
+        { "type": "textarea", "id": "intro", "label": "Intro text", "default": "The more you tell me, the more it'll look like them. None of this is a test — write as much or as little as you like." },
+        { "type": "header", "content": "Pet name" },
+        { "type": "checkbox", "id": "show_pet_name", "label": "Show this field", "default": true },
+        { "type": "text", "id": "pet_name_label", "label": "Label", "default": "Pet name(s)" },
+        { "type": "text", "id": "pet_name_placeholder", "label": "Placeholder", "default": "Milo, Bramble & Pickle" },
+        { "type": "text", "id": "pet_name_hint", "label": "Hint", "default": "If you're ordering more than one pet, pop all their names in here." },
+        { "type": "checkbox", "id": "pet_name_required", "label": "Required", "default": true },
+        { "type": "header", "content": "Instagram" },
+        { "type": "checkbox", "id": "show_instagram", "label": "Show this field", "default": true },
+        { "type": "text", "id": "instagram_label", "label": "Label", "default": "Instagram username" },
+        { "type": "text", "id": "instagram_placeholder", "label": "Placeholder", "default": "@yourname" },
+        { "type": "text", "id": "instagram_hint", "label": "Hint", "default": "So I can send your photos back and tag you if you'd like me to share the finished piece." },
+        { "type": "checkbox", "id": "instagram_required", "label": "Required", "default": false },
+        { "type": "header", "content": "Description" },
+        { "type": "checkbox", "id": "show_description", "label": "Show this field", "default": true },
+        { "type": "text", "id": "description_label", "label": "Label", "default": "About your pet" },
+        { "type": "text", "id": "description_placeholder", "label": "Placeholder", "default": "Milo is a very serious little sausage dog with one ear that never stands up. He hates the postman and loves cheese." },
+        { "type": "text", "id": "description_hint", "label": "Hint", "default": "Breed, colours, funny habits, anything you'd like me to include — or leave out." },
+        { "type": "range", "id": "description_maxlength", "min": 100, "max": 2000, "step": 50, "label": "Maximum characters", "default": 600 },
+        { "type": "checkbox", "id": "description_required", "label": "Required", "default": false },
+        { "type": "header", "content": "Photos" },
+        { "type": "textarea", "id": "photo_note", "label": "Note about sending photos", "default": "📸 After you order, you'll get an email from me — just reply with your favourite photos and I'll get started." }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy buttons",
+      "limit": 1,
+      "settings": [
+        { "type": "checkbox", "id": "show_quantity", "label": "Show quantity picker", "default": false },
+        { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show express checkout buttons", "default": true }
+      ]
+    },
+    {
+      "type": "trust",
+      "name": "Tick list",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "One item per line",
+          "default": "Drawn by hand — never traced, never AI\nPreview sent before anything is final\nHigh-resolution files, yours to print forever\nUsually ready in 3-5 days"
+        }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Drop-down panel",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "What you'll receive" },
+        { "type": "richtext", "id": "content", "label": "Content", "default": "<p>A high-resolution digital file sent to your email, ready to print at any size.</p>" },
+        { "type": "checkbox", "id": "open", "label": "Open by default", "default": false }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [{ "type": "richtext", "id": "text", "label": "Text", "default": "<p>Something extra.</p>" }]
+    }
+  ]
+}
+{% endschema %}

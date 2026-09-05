@@ -1,0 +1,47 @@
+{%- paginate blog.articles by section.settings.per_page -%}
+<div class="section" style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+  <div class="page-width">
+    <div class="section-header text-center reveal">
+      {%- if section.settings.subheading != blank -%}<span class="subheading">{{ section.settings.subheading }}</span>{%- endif -%}
+      <h1>{{ blog.title }}</h1>
+      {%- if section.settings.text != blank -%}<div class="rte section-header__text">{{ section.settings.text }}</div>{%- endif -%}
+
+      {%- if section.settings.show_tags and blog.all_tags.size > 0 -%}
+        <ul class="tag-list" style="justify-content: center; margin-top: 1.4rem;">
+          <li><a href="{{ blog.url }}" {% unless current_tags %}aria-current="page"{% endunless %}>All</a></li>
+          {%- for tag in blog.all_tags -%}
+            <li><a href="{{ blog.url }}/tagged/{{ tag | handle }}" {% if current_tags contains tag %}aria-current="page"{% endif %}>{{ tag }}</a></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    {%- if blog.articles.size > 0 -%}
+      <ul class="grid reveal" style="--cols-desktop: {{ section.settings.columns }}; --cols-tablet: 2; --cols-mobile: 1;">
+        {%- for article in blog.articles -%}
+          <li>{% render 'article-card', article: article, show_excerpt: true, show_date: true, show_author: section.settings.show_author %}</li>
+        {%- endfor -%}
+      </ul>
+      {% render 'pagination', paginate: paginate %}
+    {%- else -%}
+      <div class="empty-state"><span class="emoji">✏️</span><h2>No posts yet</h2><p>The first story is on its way.</p></div>
+    {%- endif -%}
+  </div>
+</div>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [
+    { "type": "text", "id": "subheading", "label": "Small label", "default": "The studio journal" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Long reads about drawing animals, loving them, and keeping them close.</p>" },
+    { "type": "checkbox", "id": "show_tags", "label": "Show tag filters", "default": true },
+    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": true },
+    { "type": "range", "id": "columns", "min": 2, "max": 3, "step": 1, "label": "Columns on desktop", "default": 3 },
+    { "type": "range", "id": "per_page", "min": 3, "max": 24, "step": 3, "label": "Posts per page", "default": 9 },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Top padding", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Bottom padding", "default": 72 }
+  ]
+}
+{% endschema %}

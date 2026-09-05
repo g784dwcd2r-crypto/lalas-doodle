@@ -1,0 +1,129 @@
+<header class="header scheme-{{ section.settings.color_scheme }} header--{{ section.settings.layout }}{% if section.settings.sticky %} header--sticky{% endif %}"
+  style="--header-bg: transparent; border-bottom-width: {{ section.settings.border_width }}px;">
+  <div class="header__inner" style="padding-block: {{ section.settings.padding_y }}px;">
+
+    {%- if section.settings.layout == 'center' -%}
+      <nav class="header__nav" role="navigation" aria-label="Main">
+        {%- render 'header-nav', menu: section.settings.menu -%}
+      </nav>
+
+      {%- if request.page_type == 'index' -%}
+        {%- render 'logo', is_heading: true -%}
+      {%- else -%}
+        {%- render 'logo' -%}
+      {%- endif -%}
+    {%- else -%}
+      {%- if request.page_type == 'index' -%}
+        {%- render 'logo', is_heading: true -%}
+      {%- else -%}
+        {%- render 'logo' -%}
+      {%- endif -%}
+
+      <nav class="header__nav" role="navigation" aria-label="Main">
+        {%- render 'header-nav', menu: section.settings.menu -%}
+      </nav>
+    {%- endif -%}
+
+    <div class="header__actions">
+      {%- if section.settings.show_search -%}
+        <a class="icon-button" href="{{ routes.search_url }}" aria-label="Search">{% render 'icon-search' %}</a>
+      {%- endif -%}
+
+      {%- if section.settings.show_account and shop.customer_accounts_enabled -%}
+        <a class="icon-button" href="{{ routes.account_url }}" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="8" r="4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/>
+          </svg>
+        </a>
+      {%- endif -%}
+
+      <a class="icon-button" href="{{ routes.cart_url }}" aria-label="Basket ({{ cart.item_count }} items)">
+        {% render 'icon-cart' %}
+        {%- if cart.item_count > 0 -%}
+          <span class="cart-count">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+
+      <button class="icon-button header__burger" type="button" data-menu-open aria-expanded="false" aria-controls="MobileMenu" aria-label="Open menu">
+        {% render 'icon-menu' %}
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="overlay" data-overlay></div>
+
+<div class="mobile-menu" id="MobileMenu" data-mobile-menu data-open="false" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="mobile-menu__head">
+    {%- render 'logo' -%}
+    <button class="icon-button" type="button" data-menu-close aria-label="Close menu">{% render 'icon-close' %}</button>
+  </div>
+
+  <ul class="mobile-menu__list">
+    {%- for link in section.settings.menu.links -%}
+      <li>
+        <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
+        {%- if link.links.size > 0 -%}
+          <ul class="mobile-menu__list mobile-menu__sub">
+            {%- for child in link.links -%}
+              <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+
+  {%- if section.settings.mobile_cta_text != blank -%}
+    <a class="button button--full" href="{{ section.settings.mobile_cta_link }}" style="margin-top: 1.6rem;">
+      {{ section.settings.mobile_cta_text }}
+    </a>
+  {%- endif -%}
+
+  <div style="margin-top: auto; padding-top: 2rem;">
+    {%- render 'social-icons' -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "header-section",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "left", "label": "Logo left, menu beside it" },
+        { "value": "center", "label": "Logo in the middle" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Background colour",
+      "options": [
+        { "value": "page", "label": "Page background" },
+        { "value": "white", "label": "White" },
+        { "value": "cream", "label": "Cream" },
+        { "value": "pinksoft", "label": "Soft pink" },
+        { "value": "pink", "label": "Bold pink" },
+        { "value": "green", "label": "Bold green" }
+      ],
+      "default": "white"
+    },
+    { "type": "checkbox", "id": "sticky", "label": "Stick to the top when scrolling", "default": true },
+    { "type": "range", "id": "padding_y", "min": 4, "max": 40, "step": 2, "unit": "px", "label": "Header height padding", "default": 14 },
+    { "type": "range", "id": "border_width", "min": 0, "max": 8, "step": 1, "unit": "px", "label": "Bottom line thickness", "default": 3 },
+    { "type": "header", "content": "Icons" },
+    { "type": "checkbox", "id": "show_search", "label": "Show search", "default": true },
+    { "type": "checkbox", "id": "show_account", "label": "Show account", "default": false },
+    { "type": "header", "content": "Mobile menu button" },
+    { "type": "text", "id": "mobile_cta_text", "label": "Button text", "default": "Order a portrait" },
+    { "type": "url", "id": "mobile_cta_link", "label": "Button link" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,88 @@
+{%- comment -%}
+  The Fur Doodle logo.
+  Either an uploaded image, or the built-in wordmark whose letters
+  alternate between the shop's bold pink and bold green.
+  Accepts: is_heading (boolean) — renders an <h1> wrapper on the homepage.
+{%- endcomment -%}
+
+{%- liquid
+  assign use_image = false
+  if settings.logo_type == 'image' and settings.logo_image != blank
+    assign use_image = true
+  endif
+  assign start_pink = true
+  if settings.logo_start_color == 'green'
+    assign start_pink = false
+  endif
+-%}
+
+{%- capture logo_content -%}
+  {%- if use_image -%}
+    {%- assign logo_width_2x = settings.logo_image_width | times: 2 -%}
+    <img
+      src="{{ settings.logo_image | image_url: width: logo_width_2x }}"
+      alt="{{ shop.name | escape }}"
+      width="{{ settings.logo_image.width }}"
+      height="{{ settings.logo_image.height }}"
+      class="header__logo-image"
+      style="width: var(--logo-img-w); height: auto;"
+      loading="eager">
+  {%- else -%}
+    <span class="logo-wordmark logo-wordmark--{{ settings.logo_paw_position }}{% if settings.logo_wiggle %} logo-wiggle{% endif %}">
+      {%- if settings.logo_show_paw and settings.logo_paw_position != 'right' -%}
+        {%- render 'icon-paw', class: 'logo-paw', color: 'var(--green)' -%}
+      {%- endif -%}
+      <span class="logo-wordmark__letters" aria-hidden="true">
+        {%- assign letters = settings.logo_text | default: shop.name | split: '' -%}
+        {%- for letter in letters -%}
+          {%- if letter == ' ' -%}
+            <span class="logo-wordmark__letter logo-wordmark__letter--space"></span>
+          {%- else -%}
+            {%- liquid
+              assign is_even = forloop.index0 | modulo: 2
+              if start_pink
+                if is_even == 0
+                  assign letter_color = 'var(--pink)'
+                else
+                  assign letter_color = 'var(--green)'
+                endif
+              else
+                if is_even == 0
+                  assign letter_color = 'var(--green)'
+                else
+                  assign letter_color = 'var(--pink)'
+                endif
+              endif
+            -%}
+            <span class="logo-wordmark__letter" style="color: {{ letter_color }};">{{ letter }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+      </span>
+      <span class="visually-hidden">{{ settings.logo_text | default: shop.name }}</span>
+      {%- if settings.logo_show_paw and settings.logo_paw_position == 'right' -%}
+        {%- render 'icon-paw', class: 'logo-paw', color: 'var(--pink)' -%}
+      {%- endif -%}
+    </span>
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture logo_style -%}
+  --logo-size: {{ settings.logo_font_size }}px;
+  --logo-size-mobile: {{ settings.logo_font_size_mobile }}px;
+  --logo-tracking: {{ settings.logo_letter_spacing }}px;
+  --logo-img-w: {{ settings.logo_image_width }}px;
+{%- endcapture -%}
+
+{%- if is_heading -%}
+  <h1 class="header__logo-heading" style="margin: 0; {{ logo_style }}">
+    <a href="{{ routes.root_url }}" class="header__logo">{{ logo_content }}</a>
+  </h1>
+{%- else -%}
+  <a href="{{ routes.root_url }}" class="header__logo" style="{{ logo_style }}">{{ logo_content }}</a>
+{%- endif -%}
+
+<style>
+  @media screen and (max-width: 749px) {
+    .header__logo-image { width: {{ settings.logo_image_width_mobile }}px !important; }
+  }
+</style>

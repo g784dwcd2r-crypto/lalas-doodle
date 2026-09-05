@@ -1,0 +1,62 @@
+<div class="section scheme-{{ section.settings.color_scheme }}"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+  <div class="page-width page-width--narrow text-center reveal">
+    {%- if section.settings.emoji != blank -%}
+      <div style="font-size: 3rem; line-height: 1; margin-bottom: 0.6rem;">{{ section.settings.emoji }}</div>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.text != blank -%}<div class="rte" style="margin-bottom: 1.8rem;">{{ section.settings.text }}</div>{%- endif -%}
+
+    {%- form 'customer', class: 'newsletter__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      {%- if form.posted_successfully? -%}
+        <p class="form-status form-status--success" style="width: 100%;">🐾 Welcome to the doodle post! Check your inbox.</p>
+      {%- elsif form.errors -%}
+        <p class="form-status form-status--error" style="width: 100%;">{{ form.errors.translated_fields.email }} {{ form.errors.messages.email }}</p>
+      {%- endif -%}
+      <div class="field">
+        <label class="visually-hidden" for="NewsletterEmail-{{ section.id }}">Email</label>
+        <input id="NewsletterEmail-{{ section.id }}" type="email" name="contact[email]" placeholder="{{ section.settings.placeholder }}" required autocomplete="email">
+      </div>
+      <button type="submit" class="button">{{ section.settings.button_label }}</button>
+    {%- endform -%}
+
+    {%- if section.settings.footnote != blank -%}
+      <p style="margin-top: 1rem; font-size: 0.88rem; opacity: 0.8;">{{ section.settings.footnote }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "class": "newsletter-section",
+  "settings": [
+    { "type": "text", "id": "emoji", "label": "Emoji", "default": "💌" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Join the doodle post" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>New artwork, studio nonsense, and little discounts for the people who make this possible. No spam, ever — just pets.</p>" },
+    { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "your@email.com" },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Sign me up" },
+    { "type": "text", "id": "footnote", "label": "Small note", "default": "Unsubscribe any time. Your pet won't be offended." },
+    { "type": "header", "content": "Section" },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Background colour",
+      "options": [
+        { "value": "page", "label": "Page background" },
+        { "value": "white", "label": "White" },
+        { "value": "cream", "label": "Cream" },
+        { "value": "pinksoft", "label": "Soft pink" },
+        { "value": "pink", "label": "Bold pink" },
+        { "value": "green", "label": "Bold green" },
+        { "value": "deep", "label": "Deep green" }
+      ],
+      "default": "green"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 180, "step": 4, "unit": "px", "label": "Top padding", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 180, "step": 4, "unit": "px", "label": "Bottom padding", "default": 72 }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

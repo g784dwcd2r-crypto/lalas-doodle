@@ -1,0 +1,49 @@
+{%- comment -%}
+  Accepts: product, show_badge (boolean)
+  Styling is driven by the "Product cards" theme settings.
+{%- endcomment -%}
+{%- assign ratio_class = settings.card_image_ratio | prepend: 'media--' -%}
+<div class="card lift" style="text-align: {{ settings.card_text_align }};">
+  <div class="card__media media {{ ratio_class }}" style="border-radius: 0;">
+    {%- if show_badge and product.compare_at_price > product.price -%}
+      <span class="pill card__badge">Sale</span>
+    {%- elsif show_badge and product.tags contains 'bestseller' -%}
+      <span class="pill card__badge">Bestseller</span>
+    {%- endif -%}
+
+    {%- if product.featured_media -%}
+      <img
+        src="{{ product.featured_media | image_url: width: 800 }}"
+        srcset="{{ product.featured_media | image_url: width: 400 }} 400w, {{ product.featured_media | image_url: width: 800 }} 800w, {{ product.featured_media | image_url: width: 1200 }} 1200w"
+        sizes="(min-width: 990px) 380px, (min-width: 750px) 45vw, 92vw"
+        alt="{{ product.featured_media.alt | default: product.title | escape }}"
+        width="{{ product.featured_media.width }}"
+        height="{{ product.featured_media.height }}"
+        loading="lazy">
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+
+    {%- if settings.card_second_image and product.media[1] -%}
+      <img class="card__media-second"
+        src="{{ product.media[1] | image_url: width: 800 }}"
+        alt=""
+        loading="lazy"
+        style="width: 100%; height: 100%; object-fit: cover;">
+    {%- endif -%}
+
+    {%- if settings.card_quick_add -%}
+      <a class="button button--small card__quick" href="{{ product.url }}" tabindex="-1">View this doodle</a>
+    {%- endif -%}
+  </div>
+
+  <div class="card__body">
+    {%- if settings.card_show_vendor and product.vendor != blank -%}
+      <span class="card__vendor">{{ product.vendor }}</span>
+    {%- endif -%}
+    <h3 class="card__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    {%- if settings.card_show_price -%}
+      <div class="card__price">{% render 'price', product: product %}</div>
+    {%- endif -%}
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="marquee scheme-{{ section.settings.color_scheme }}"
+  style="--marquee-speed: {{ section.settings.speed }}s; --marquee-size: {{ section.settings.text_size }}rem; border-width: {{ section.settings.border_width }}px 0;">
+  <div class="marquee__track" data-marquee-track>
+    {%- for block in section.blocks -%}
+      <span class="marquee__item" {{ block.shopify_attributes }}>
+        {{ block.settings.text }}
+        {%- case section.settings.separator -%}
+          {%- when 'paw' -%}{% render 'icon-paw' %}
+          {%- when 'heart' -%}{% render 'icon-heart' %}
+          {%- when 'star' -%}{% render 'icon-star' %}
+          {%- when 'dot' -%}&bull;
+        {%- endcase -%}
+      </span>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Scrolling strip",
+  "class": "marquee-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour",
+      "options": [
+        { "value": "pink", "label": "Bold pink" },
+        { "value": "green", "label": "Bold green" },
+        { "value": "pinksoft", "label": "Soft pink" },
+        { "value": "deep", "label": "Deep green" },
+        { "value": "cream", "label": "Cream" },
+        { "value": "white", "label": "White" }
+      ],
+      "default": "pink"
+    },
+    {
+      "type": "select",
+      "id": "separator",
+      "label": "Separator",
+      "options": [
+        { "value": "paw", "label": "Paw print" },
+        { "value": "heart", "label": "Heart" },
+        { "value": "star", "label": "Star" },
+        { "value": "dot", "label": "Dot" }
+      ],
+      "default": "paw"
+    },
+    { "type": "range", "id": "speed", "min": 8, "max": 80, "step": 2, "unit": "s", "label": "Scroll speed (higher = slower)", "default": 30 },
+    { "type": "range", "id": "text_size", "min": 0.8, "max": 3, "step": 0.1, "unit": "rem", "label": "Text size", "default": 1.4 },
+    { "type": "range", "id": "border_width", "min": 0, "max": 8, "step": 1, "unit": "px", "label": "Line thickness", "default": 3 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Words",
+      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Hand drawn with love" }]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling strip",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Hand drawn with love" } },
+        { "type": "item", "settings": { "text": "Digital files in 3-5 days" } },
+        { "type": "item", "settings": { "text": "From £35" } },
+        { "type": "item", "settings": { "text": "Print as big as you like" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

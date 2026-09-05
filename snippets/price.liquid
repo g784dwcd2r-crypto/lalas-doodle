@@ -1,0 +1,21 @@
+{%- comment -%} Accepts: product or variant, class {%- endcomment -%}
+{%- liquid
+  if variant
+    assign target = variant
+    assign price = variant.price
+    assign compare = variant.compare_at_price
+  else
+    assign target = product
+    assign price = product.price
+    assign compare = product.compare_at_price
+  endif
+-%}
+<span class="price {{ class }}">
+  {%- if product and product.price_varies and variant == null -%}
+    <span class="price--from">From</span>
+  {%- endif -%}
+  <span class="{% if compare > price %}price--sale{% endif %}">{{ price | money }}</span>
+  {%- if compare > price -%}
+    <s class="price--compare">{{ compare | money }}</s>
+  {%- endif -%}
+</span>

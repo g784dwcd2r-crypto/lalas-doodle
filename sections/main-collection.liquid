@@ -1,0 +1,42 @@
+{%- paginate collection.products by section.settings.per_page -%}
+<div class="section" style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+  <div class="page-width">
+    <div class="section-header text-center reveal">
+      <h1>{{ collection.title }}</h1>
+      {%- if collection.description != blank and section.settings.show_description -%}
+        <div class="rte section-header__text">{{ collection.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if collection.products.size > 0 -%}
+      <ul class="grid reveal" style="--cols-desktop: {{ section.settings.columns }}; --cols-tablet: 2; --cols-mobile: {{ section.settings.columns_mobile }};">
+        {%- for product in collection.products -%}
+          <li>{% render 'product-card', product: product, show_badge: true %}</li>
+        {%- endfor -%}
+      </ul>
+      {% render 'pagination', paginate: paginate %}
+    {%- else -%}
+      <div class="empty-state">
+        <span class="emoji">🐾</span>
+        <h2>Nothing here just yet</h2>
+        <p>New doodles are on their way. Have a look around in the meantime.</p>
+        <a class="button" href="{{ routes.all_products_collection_url }}" style="margin-top: 1rem;">See everything</a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+    { "type": "checkbox", "id": "show_description", "label": "Show collection description", "default": true },
+    { "type": "range", "id": "columns", "min": 2, "max": 4, "step": 1, "label": "Columns on desktop", "default": 3 },
+    { "type": "range", "id": "columns_mobile", "min": 1, "max": 2, "step": 1, "label": "Columns on mobile", "default": 2 },
+    { "type": "range", "id": "per_page", "min": 6, "max": 36, "step": 3, "label": "Products per page", "default": 12 },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Top padding", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Bottom padding", "default": 72 }
+  ]
+}
+{% endschema %}

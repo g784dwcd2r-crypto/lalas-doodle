@@ -1,0 +1,60 @@
+<article class="section" style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+  <div class="page-width">
+    <div class="article-hero reveal">
+      <div class="article-hero__meta">
+        <span>{{ article.published_at | date: '%d %B %Y' }}</span>
+        {%- if section.settings.show_author and article.author != blank -%}<span>by {{ article.author }}</span>{%- endif -%}
+        {%- if article.tags.size > 0 -%}<span>{{ article.tags | join: ' · ' }}</span>{%- endif -%}
+      </div>
+      <h1>{{ article.title }}</h1>
+    </div>
+
+    {%- if article.image and section.settings.show_image -%}
+      <div class="article-featured-image reveal" style="max-width: 900px; margin-inline: auto; margin-bottom: 2.5rem;">
+        <img src="{{ article.image | image_url: width: 1400 }}"
+          srcset="{{ article.image | image_url: width: 700 }} 700w, {{ article.image | image_url: width: 1400 }} 1400w"
+          sizes="(min-width: 990px) 900px, 92vw"
+          alt="{{ article.image.alt | escape }}" loading="eager">
+      </div>
+    {%- endif -%}
+
+    <div class="article-body rte reveal">
+      {{ article.content }}
+    </div>
+
+    {%- if section.settings.show_share -%}
+      <div class="text-center" style="margin-top: 3rem;">
+        <div class="divider-dots"><span></span><span></span><span></span></div>
+        <p style="font-weight: 700; font-family: var(--font-heading);">Enjoyed this? Send it to a fellow pet person 💌</p>
+      </div>
+    {%- endif -%}
+
+    {%- if blog.next_article or blog.previous_article -%}
+      <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; max-width: 760px; margin: 3rem auto 0;">
+        {%- if blog.previous_article -%}
+          <a class="button button--outline button--small" href="{{ blog.previous_article.url }}">&larr; Previous</a>
+        {%- endif -%}
+        {%- if blog.next_article -%}
+          <a class="button button--outline button--small" href="{{ blog.next_article.url }}" style="margin-left: auto;">Next &rarr;</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="text-center" style="margin-top: 2.4rem;">
+      <a class="button" href="{{ blog.url }}">Back to the journal</a>
+    </div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": [
+    { "type": "checkbox", "id": "show_image", "label": "Show featured image", "default": true },
+    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": true },
+    { "type": "checkbox", "id": "show_share", "label": "Show share note", "default": true },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Top padding", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Bottom padding", "default": 72 }
+  ]
+}
+{% endschema %}

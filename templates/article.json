@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "main": { "type": "main-article", "settings": { "show_image": true, "show_author": true, "show_share": true, "padding_top": 56, "padding_bottom": 64 } },
+    "blog": {
+      "type": "blog-posts",
+      "settings": {
+        "subheading": "Keep reading",
+        "heading": "More from the journal",
+        "text": "",
+        "text_align": "center",
+        "blog": "news",
+        "limit": 3,
+        "columns": 3,
+        "show_excerpt": true,
+        "show_date": true,
+        "button_label": "See all posts",
+        "color_scheme": "cream",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "newsletter": { "type": "newsletter", "settings": { "color_scheme": "green", "padding_top": 72, "padding_bottom": 72 } }
+  },
+  "order": ["main", "blog", "newsletter"]
+}
