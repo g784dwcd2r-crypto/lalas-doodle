@@ -71,6 +71,7 @@
   --logo-size-mobile: {{ settings.logo_font_size_mobile }}px;
   --logo-tracking: {{ settings.logo_letter_spacing }}px;
   --logo-img-w: {{ settings.logo_image_width }}px;
+  --logo-img-w-mobile: {{ settings.logo_image_width_mobile }}px;
 {%- endcapture -%}
 
 {%- if is_heading -%}
@@ -80,9 +81,3 @@
 {%- else -%}
   <a href="{{ routes.root_url }}" class="header__logo" style="{{ logo_style }}">{{ logo_content }}</a>
 {%- endif -%}
-
-<style>
-  @media screen and (max-width: 749px) {
-    .header__logo-image { width: {{ settings.logo_image_width_mobile }}px !important; }
-  }
-</style>

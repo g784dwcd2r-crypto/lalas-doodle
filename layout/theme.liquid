@@ -133,7 +133,7 @@
     {%- if settings.pattern_enabled -%}
       <div class="page-pattern" aria-hidden="true"
         style="
-          --pattern-url: url({% if settings.pattern_image %}{{ settings.pattern_image | image_url: width: 800 }}{% else %}{{ 'pattern-leaves.svg' | asset_url }}{% endif %});
+          --pattern-url: url('{% if settings.pattern_image %}{{ settings.pattern_image | image_url: width: 800 }}{% else %}{{ 'pattern-leaves.svg' | asset_url }}{% endif %}');
         "></div>
     {%- endif -%}
 
