@@ -426,8 +426,8 @@
         "q4": {
           "type": "question",
           "settings": {
-            "question": "Can you draw more than one pet together?",
-            "answer": "<p>Yes, and it's one of my favourite things to do. The first pet is £35 and each extra pet is £7. They don't need to be in the same photo — send me one good picture of each and I'll bring them together as if they'd posed nicely all along, which they never do.</p>",
+            "question": "How much does it cost?",
+            "answer": "<p>One pet is <strong>£35</strong>, and every extra pet is <strong>£5</strong> — so two pets is £40, three is £45, and so on. Adding a background is <strong>£10</strong>.</p><p>Your pets don't need to be in the same photo. Send me one good picture of each and I'll bring them together as if they'd posed nicely all along, which they never do.</p>",
             "open": false
           }
         },
@@ -435,7 +435,7 @@
           "type": "question",
           "settings": {
             "question": "With or without a background?",
-            "answer": "<p>Both are lovely and both cost the same. Without a background, your pet floats on a clean colour — bold, graphic, very easy to frame. With a background, I add colour and shapes around them for something a bit more decorative. Not sure? Pick either and tell me in the notes; I'll advise honestly when I see your photo.</p>",
+            "answer": "<p>Without a background, your pet floats on a clean colour — bold, graphic, very easy to frame. That's the standard price. With a background I add colour and shapes around them for something more decorative, and that's <strong>£10 extra</strong>.</p><p>Not sure? Pick either and tell me in the notes; I'll advise honestly when I see your photo.</p>",
             "open": false
           }
         },

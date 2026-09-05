@@ -273,7 +273,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>One pet is £35, and every extra pet is £7. Send me a photo whenever you're ready — there's no rush, and there's never any pressure.</p>",
+            "text": "<p>One pet is £35, every extra pet is £5, and a background is £10. Send me a photo whenever you're ready — there's no rush, and there's never any pressure.</p>",
             "size": 1.1
           }
         },

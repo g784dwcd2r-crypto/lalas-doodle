@@ -4,7 +4,7 @@
       "type": "main-product",
       "blocks": {
         "title": { "type": "title", "settings": { "show_vendor": false, "rating_text": "Loved by hundreds of pet people" } },
-        "price": { "type": "price", "settings": { "note": "One pet £35 — add £7 for each extra pet. Digital file, so there's no postage to pay." } },
+        "price": { "type": "price", "settings": { "note": "One pet £35 — add £5 for each extra pet, and £10 if you'd like a background." } },
         "variants": { "type": "variant_picker", "settings": {} },
         "description": { "type": "description", "settings": {} },
         "personalise": {
@@ -40,7 +40,7 @@
         },
         "pricing": {
           "type": "price_table",
-          "settings": { "heading": "How pricing works", "price_1": "£35", "price_2": "£42", "price_3": "£49", "price_extra": "+£7" }
+          "settings": { "heading": "How pricing works", "price_1": "£35", "price_2": "£40", "price_3": "£45", "price_extra": "+£5" }
         },
         "acc1": {
           "type": "accordion",
