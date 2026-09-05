@@ -274,7 +274,7 @@
           "type": "text",
           "settings": {
             "text": "<p>One pet is £35, and every extra pet is £7. Send me a photo whenever you're ready — there's no rush, and there's never any pressure.</p>",
-            "size": 1.15
+            "size": 1.1
           }
         },
         "btn": {

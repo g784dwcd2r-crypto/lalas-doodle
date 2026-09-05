@@ -3,12 +3,39 @@
     "banner": {
       "type": "rich-text",
       "blocks": {
-        "sub": { "type": "subheading", "settings": { "text": "Come and say hi" } },
-        "head": { "type": "heading", "settings": { "text": "Let's talk about your pet", "size": "h1" } },
-        "text": { "type": "text", "settings": { "text": "<p>Questions, special requests, tricky photos, or just want to show me a picture of your dog? All of it is welcome here.</p>", "size": 1.15 } }
+        "sub": {
+          "type": "subheading",
+          "settings": {
+            "text": "Come and say hi"
+          }
+        },
+        "head": {
+          "type": "heading",
+          "settings": {
+            "text": "Let's talk about your pet",
+            "size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Questions, special requests, tricky photos, or just want to show me a picture of your dog? All of it is welcome here.</p>",
+            "size": 1.1
+          }
+        }
       },
-      "block_order": ["sub", "head", "text"],
-      "settings": { "text_align": "center", "narrow": true, "color_scheme": "pinksoft", "padding_top": 64, "padding_bottom": 56 }
+      "block_order": [
+        "sub",
+        "head",
+        "text"
+      ],
+      "settings": {
+        "text_align": "center",
+        "narrow": true,
+        "color_scheme": "pinksoft",
+        "padding_top": 64,
+        "padding_bottom": 56
+      }
     },
     "form": {
       "type": "contact-form",
@@ -25,13 +52,50 @@
     "faq": {
       "type": "faq",
       "blocks": {
-        "q1": { "type": "question", "settings": { "question": "How quickly do you reply?", "answer": "<p>Usually within a day, sometimes within an hour if I'm at my desk. If a couple of days pass with nothing, check your spam folder and then nudge me again — I promise I'm not ignoring you.</p>", "open": true } },
-        "q2": { "type": "question", "settings": { "question": "Can I ask for something custom?", "answer": "<p>Please do. Costumes, hats, a favourite blanket, two pets who never met, a background in your kitchen colours. If you can describe it, I'll tell you honestly whether I can draw it.</p>", "open": false } },
-        "q3": { "type": "question", "settings": { "question": "Do you do commissions for businesses?", "answer": "<p>Yes — logos, mascots, illustrations for pet businesses. Message me with what you have in mind and we'll work out the licensing together.</p>", "open": false } }
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "How quickly do you reply?",
+            "answer": "<p>Usually within a day, sometimes within an hour if I'm at my desk. If a couple of days pass with nothing, check your spam folder and then nudge me again — I promise I'm not ignoring you.</p>",
+            "open": true
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Can I ask for something custom?",
+            "answer": "<p>Please do. Costumes, hats, a favourite blanket, two pets who never met, a background in your kitchen colours. If you can describe it, I'll tell you honestly whether I can draw it.</p>",
+            "open": false
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Do you do commissions for businesses?",
+            "answer": "<p>Yes — logos, mascots, illustrations for pet businesses. Message me with what you have in mind and we'll work out the licensing together.</p>",
+            "open": false
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3"],
-      "settings": { "subheading": "Quick answers", "heading": "Before you write", "text": "", "button_label": "", "color_scheme": "white", "padding_top": 72, "padding_bottom": 80 }
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "subheading": "Quick answers",
+        "heading": "Before you write",
+        "text": "",
+        "button_label": "",
+        "color_scheme": "white",
+        "padding_top": 72,
+        "padding_bottom": 80
+      }
     }
   },
-  "order": ["banner", "form", "faq"]
+  "order": [
+    "banner",
+    "form",
+    "faq"
+  ]
 }
