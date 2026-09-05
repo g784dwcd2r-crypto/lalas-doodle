@@ -32,7 +32,7 @@
         "show_search": true,
         "show_account": false,
         "mobile_cta_text": "Order a portrait",
-        "mobile_cta_link": "/collections/pet-portraits"
+        "mobile_cta_link": "shopify://collections/custom-digital-portraits"
       }
     }
   },

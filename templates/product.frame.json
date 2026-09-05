@@ -1,0 +1,76 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": { "type": "title", "settings": { "show_vendor": false, "rating_text": "" } },
+        "price": { "type": "price", "settings": { "note": "Frame only — it arrives empty. Order it with a portrait and I print the artwork for free and post it framed, ready to display." } },
+        "variants": { "type": "variant_picker", "settings": {} },
+        "description": { "type": "description", "settings": {} },
+        "buy": { "type": "buy_buttons", "settings": { "show_quantity": true, "show_dynamic_checkout": true } },
+        "trust": {
+          "type": "trust",
+          "settings": {
+            "items": "Order it with a portrait and the printing is free\nPacked carefully and posted by me\n14-day returns on frames\nUK, EU and international delivery"
+          }
+        },
+        "acc1": {
+          "type": "accordion",
+          "settings": {
+            "heading": "What you'll receive",
+            "content": "<p>The frame itself, posted out to you. On its own it arrives empty — the portrait in the photographs is only there to show the frame in use.</p><p>Order it alongside any piece from the custom portrait collection and I will print your portrait for free, fit it into this frame and send the finished thing out ready to stand on a shelf or hang on the wall. You pay for the artwork and the frame; the printing is included.</p>",
+            "open": false
+          }
+        },
+        "acc2": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Delivery & returns",
+            "content": "<p>Frames are posted from the UK. Delivery is calculated at checkout and I ship to the UK, Europe and internationally.</p><p>You can return a frame within 14 days of receiving it for any reason, and I'll refund you once it's back with me. If it arrives damaged, send me a photograph and I'll replace or refund it in full, postage included.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": ["title", "price", "variants", "description", "buy", "trust", "acc1", "acc2"],
+      "settings": {
+        "button_label": "Add to basket",
+        "sticky_info": true,
+        "image_ratio": "square",
+        "padding_top": 48,
+        "padding_bottom": 56
+      }
+    },
+    "cross-sell": {
+      "type": "featured-collection",
+      "settings": {
+        "subheading": "Fill it with something you love",
+        "heading": "Add a portrait and the printing is free",
+        "text": "<p>Order any portrait alongside this frame and I'll print it for you, fit it, and post the whole thing out ready to display.</p>",
+        "text_align": "center",
+        "collection": "custom-digital-portraits",
+        "limit": 4,
+        "columns": 4,
+        "columns_mobile": 2,
+        "button_label": "See all portraits",
+        "button_link": "shopify://collections/custom-digital-portraits",
+        "color_scheme": "cream",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "emoji": "💌",
+        "heading": "Join the doodle post",
+        "text": "<p>New artwork, studio nonsense, and little discounts for the people who make this possible.</p>",
+        "button_label": "Sign me up",
+        "footnote": "Unsubscribe any time. Your pet won't be offended.",
+        "color_scheme": "green",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": ["main", "cross-sell", "newsletter"]
+}

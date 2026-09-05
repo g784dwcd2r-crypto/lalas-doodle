@@ -43,13 +43,13 @@
         "p1": {
           "type": "paragraph",
           "settings": {
-            "text": "<p>I never planned to be someone who draws animals all day. I planned to be a girl with a warm little shadow at her feet — and for a long, lovely while, that's exactly what I was. She followed me from room to room. She sat outside the bathroom door like I might vanish if she blinked. She had opinions about the postman, strong feelings about cheese, and one ear that never quite learned to stand up straight. And every single time I cried, she put one paw on my knee, as if to say <em>I've got you, don't be silly, I'm right here.</em></p>"
+            "text": "<p>I never planned to be someone who draws animals all day. I planned to be a girl with a warm little shadow at her feet — and for a long, lovely while, that's exactly what I was. Her name was <strong>Lalas' Marie</strong>. She followed me from room to room. She sat outside the bathroom door like I might vanish if she blinked. She had opinions about the postman, strong feelings about cheese, and one ear that never quite learned to stand up straight. And every single time I cried, she put one paw on my knee, as if to say <em>I've got you, don't be silly, I'm right here.</em></p>"
           }
         },
         "p2": {
           "type": "paragraph",
           "settings": {
-            "text": "<p>When she passed away, the house went quiet in a way I didn't know a house could be. No little nails clicking across the kitchen floor. No sighing thump against the sofa at exactly nine o'clock. I kept finding her fur on my jumpers weeks afterwards and it undid me every single time. I would be absolutely fine, and then I'd open the cupboard where the treats lived, and I would not be fine at all.</p>"
+            "text": "<p>When Marie passed away, the house went quiet in a way I didn't know a house could be. No little nails clicking across the kitchen floor. No sighing thump against the sofa at exactly nine o'clock. I kept finding her fur on my jumpers weeks afterwards and it undid me every single time. I would be absolutely fine, and then I'd open the cupboard where the treats lived, and I would not be fine at all.</p>"
           }
         },
         "p3": {
@@ -73,7 +73,7 @@
         "p5": {
           "type": "paragraph",
           "settings": {
-            "text": "<p>I posted it online without thinking much of it at all. Then a stranger asked if I would draw her cat. Then someone wanted their rabbit. Then a very old greyhound with a very silly name, then a hamster, then a horse, then a one-eyed rescue tabby called Nigel who I genuinely still think about. And that is how <strong>thefurdoodle</strong> quietly came to be: on a bedroom floor, out of grief first, and then — slowly, softly, almost without me noticing — out of pure joy.</p>"
+            "text": "<p>I posted it online without thinking much of it at all. Then a stranger asked if I would draw her cat. Then someone wanted their rabbit. Then a very old greyhound with a very silly name, then a hamster, then a horse, then a one-eyed rescue tabby called Nigel who I genuinely still think about. And that is how <strong>thefurdoodle</strong> quietly came to be: on a bedroom floor, out of grief first, and then — slowly, softly, almost without me noticing — out of pure joy. I sign my work <strong>Lala Marie</strong> after her, so she comes along to every portrait I draw.</p>"
           }
         },
         "q1": {
@@ -208,12 +208,12 @@
       "settings": {
         "subheading": "",
         "heading": "The whole story, then",
-        "lead": "<p>This little shop began with one very good girl, a very quiet house, and a drawing I made at two in the morning because I couldn't bear to let her go.</p>",
+        "lead": "<p>This little shop began with Lalas' Marie, my cat — a very quiet house after she was gone, and a drawing I made at two in the morning because I couldn't bear to let her go.</p>",
         "signature": "Lala x",
         "button_label": "Have your pet drawn",
-        "button_link": "/collections/pet-portraits",
+        "button_link": "shopify://collections/custom-digital-portraits",
         "tape_text": "me & my whole heart",
-        "caption": "The one who started it all 🤍",
+        "caption": "Lalas' Marie — the one who started it all 🤍",
         "image_position": "left",
         "color_scheme": "page",
         "padding_top": 72,
@@ -281,7 +281,7 @@
           "type": "button",
           "settings": {
             "label": "Order a portrait",
-            "link": "/collections/pet-portraits",
+            "link": "shopify://collections/custom-digital-portraits",
             "style": "solid"
           }
         }
