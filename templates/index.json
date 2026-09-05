@@ -178,37 +178,37 @@
         "g1": {
           "type": "artwork",
           "settings": {
-            "caption": "Milo, the world's most serious sausage dog"
+            "caption": "Bold lines, bright colour, drawn entirely by hand"
           }
         },
         "g2": {
           "type": "artwork",
           "settings": {
-            "caption": "Poppy, who has never once come when called"
+            "caption": "With a background, full of colour"
           }
         },
         "g3": {
           "type": "artwork",
           "settings": {
-            "caption": "Bramble & Pickle, partners in crime"
+            "caption": "Two pets together, drawn from two separate photos"
           }
         },
         "g4": {
           "type": "artwork",
           "settings": {
-            "caption": "Nala, professional sunbeam finder"
+            "caption": "Printed, framed and ready to display"
           }
         },
         "g5": {
           "type": "artwork",
           "settings": {
-            "caption": "Alfie, 14 years of very good boy"
+            "caption": "Clean and simple, no background"
           }
         },
         "g6": {
           "type": "artwork",
           "settings": {
-            "caption": "Hazel, who believes she is a person"
+            "caption": "Your favourite photo, turned into art"
           }
         }
       },
@@ -240,13 +240,13 @@
         "p1": {
           "type": "paragraph",
           "settings": {
-            "text": "<p>I never planned to be someone who draws animals all day. I planned to be a girl with a warm little shadow at her feet — and for a long, lovely while, that's exactly what I was. She followed me from room to room, sat outside the bathroom door like I might vanish if she blinked, and every single time I cried she put one paw on my knee, as if to say <em>I've got you, don't be silly, I'm right here.</em></p>"
+            "text": "<p>I never planned to be someone who draws animals all day. I planned to be a girl with a warm little shadow at her feet — and for a long, lovely while, that's exactly what I was. Lalas' Marie followed me from room to room, sat outside the bathroom door like I might vanish if she blinked, and every single time I cried she put one paw on my knee, as if to say <em>I've got you, don't be silly, I'm right here.</em></p>"
           }
         },
         "p2": {
           "type": "paragraph",
           "settings": {
-            "text": "<p>When she passed away, the house went quiet in a way I didn't know a house could be. One night I couldn't sleep, so I sat on the floor with my iPad and started drawing her. Badly. Through tears. Over and over. It was the only way I could think of to keep her in the room with me — and when I finally finished, something in my chest loosened for the first time in weeks.</p>"
+            "text": "<p>When Marie passed away, the house went quiet in a way I didn't know a house could be. One night I couldn't sleep, so I sat on the floor with my iPad and started drawing her. Badly. Through tears. Over and over. It was the only way I could think of to keep her in the room with me — and when I finally finished, something in my chest loosened for the first time in weeks.</p>"
           }
         },
         "q1": {
@@ -258,7 +258,7 @@
         "p3": {
           "type": "paragraph",
           "settings": {
-            "text": "<p>Then a stranger asked if I'd draw her cat. Then someone's rabbit, then a very old greyhound with a very silly name. And that is how <strong>thefurdoodle</strong> quietly came to be: on a bedroom floor, out of grief first, and then — slowly, softly — out of pure joy.</p>"
+            "text": "<p>Then a stranger asked if I'd draw her cat. Then someone's rabbit, then a very old greyhound with a very silly name. And that is how <strong>thefurdoodle</strong> quietly came to be: on a bedroom floor, out of grief first, and then — slowly, softly — out of pure joy. I sign my work <strong>Lala Marie</strong> after her, so she comes along to every portrait I draw.</p>"
           }
         },
         "f1": {
@@ -307,12 +307,12 @@
       "settings": {
         "subheading": "The girl behind the doodles",
         "heading": "Hi, I'm Lala 🌷",
-        "lead": "<p>This whole little shop began with one very good girl, a very quiet house, and a drawing I made at 2am because I couldn't bear to let her go.</p>",
+        "lead": "<p>This whole little shop began with Lalas' Marie, my cat — a very quiet house after she was gone, and a drawing I made at 2am because I couldn't bear to let her go.</p>",
         "signature": "Lala x",
         "button_label": "Read my whole story",
         "button_link": "/pages/about",
         "tape_text": "me & my whole heart",
-        "caption": "The one who started it all 🤍",
+        "caption": "Lalas' Marie — the one who started it all 🤍",
         "image_position": "left",
         "color_scheme": "page",
         "padding_top": 88,
