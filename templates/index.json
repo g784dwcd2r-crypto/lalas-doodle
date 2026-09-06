@@ -6,8 +6,8 @@
         "s1": {
           "type": "stat",
           "settings": {
-            "number": "500+",
-            "label": "happy pets drawn"
+            "number": "£35",
+            "label": "from, for one pet"
           }
         },
         "s2": {
@@ -319,65 +319,6 @@
         "padding_bottom": 88
       }
     },
-    "reviews": {
-      "type": "reviews",
-      "blocks": {
-        "r1": {
-          "type": "review",
-          "settings": {
-            "rating": "5",
-            "title": "I actually cried",
-            "body": "<p>I sent Lala one slightly blurry photo and she somehow captured every single thing about him — the wonky ear, the eyebrows, the look he gives me when dinner is late. It's hanging in the hallway and I smile at it every day.</p>",
-            "author": "Sophie R.",
-            "pet_name": "Milo",
-            "date": "March 2026",
-            "verified": true
-          }
-        },
-        "r2": {
-          "type": "review",
-          "settings": {
-            "rating": "5",
-            "title": "The perfect memorial",
-            "body": "<p>We lost our girl last winter and I couldn't look at photos without falling apart. Somehow the drawing is different — it's bright and happy and so completely her. It's the first thing that made me smile instead of cry.</p>",
-            "author": "Daniel K.",
-            "pet_name": "Bess",
-            "date": "February 2026",
-            "verified": true
-          }
-        },
-        "r3": {
-          "type": "review",
-          "settings": {
-            "rating": "5",
-            "title": "Both cats, finally together",
-            "body": "<p>My two have never once sat still in the same room, so getting them in one portrait felt impossible. Lala drew them from two separate photos and you'd swear they'd posed for it. Worth every penny.</p>",
-            "author": "Amira T.",
-            "pet_name": "Bramble & Pickle",
-            "date": "January 2026",
-            "verified": true
-          }
-        }
-      },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3"
-      ],
-      "settings": {
-        "subheading": "Kind words",
-        "heading": "What people say about their doodles",
-        "text_align": "center",
-        "filter_to_product": false,
-        "columns": 3,
-        "show_images": true,
-        "image_ratio": "square",
-        "show_summary": true,
-        "color_scheme": "cream",
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    },
     "blog": {
       "type": "blog-posts",
       "settings": {
@@ -590,7 +531,6 @@
     "how-it-works",
     "gallery",
     "about",
-    "reviews",
     "blog",
     "faq",
     "newsletter"
